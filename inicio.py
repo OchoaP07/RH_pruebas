@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
 
 app = Flask(__name__)
-
+#cambio 1
 @app.route('/')
 def home():
     return render_template("home.html")
