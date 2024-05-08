@@ -1,5 +1,14 @@
 *{
     margin: auto;
     padding: auto;
+    
+}
+body{
+    background-image: url(/static/imagenes/f.png);
+    background-size: cover;
+}
 
+nav{
+    font-size: 20px;
+    border-radius: 20px;
 }
