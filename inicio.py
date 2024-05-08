@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
 
 app = Flask(__name__)
-#cambio 1
+
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -366,4 +366,5 @@ def puesto_fedita(idP):
 
 
 if __name__ == "__main__":
+    db_connection()
     app.run(debug=True)
