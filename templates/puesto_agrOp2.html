@@ -195,15 +195,15 @@
    {% endfor %}
      <script>
            function miFunc3(){
-           {% for hab in catHabilidad %}
-           var isChecked = document.getElementById('h1').checked;
-             if ( {{hab.0}}>1 && isChecked ) {
-                  document.getElementById('h{{hab.0}}').disabled=true;
-                  document.getElementById('h{{hab.0}}').checked=false; }
-             else
-                 { document.getElementById('h{{hab.0}}').disabled=false;}
+               for hab in catHabilidad{
+                  var isChecked = document.getElementById('h1').checked;
+                    if ( {{hab.0}}>1 && isChecked ) {
+                         document.getElementById('h{{hab.0}}').disabled=true;
+                         document.getElementById('h{{hab.0}}').checked=false; }
+                    else
+                        { document.getElementById('h{{hab.0}}').disabled=false;}
 
-           {% endfor %}
+               }
             }
         </script>
 

@@ -4,6 +4,7 @@ import pymysql
 app = Flask(__name__)
 
 @app.route('/')
+
 def home():
     return render_template("home.html")
 
@@ -362,9 +363,5 @@ def puesto_fedita(idP):
             conn.commit()
     return redirect(url_for('puesto'))
 
-
-
-
 if __name__ == "__main__":
-    db_connection()
     app.run(debug=True)
