@@ -8,6 +8,7 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
+#area
 @app.route('/area')
 def area():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
@@ -56,6 +57,54 @@ def area_fagrega():
         conn.commit()
     return redirect(url_for('area'))
 
+#carrera
+@app.route('/carrera')
+def carrera():
+    conn=pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idCarrera, descripcion from carrera order by idCarrera')
+    datos = cursor.fetchall()
+    return render_template('carrera.html', comentarios=datos)
+
+@app.route('/carrera_agregar')
+def carrera_agregar():
+    return render_template('carrera_agr.html')
+
+@app.route('/carrera_fagrega', methods=['POST'])
+def carrera_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn=pymysql.connect(host="localhost", user="root", passwd="", db="rh3")
+        cursor= conn.cursor()
+        cursor.execute("INSERT INTO carrera (descripcion) values (%s)",(desc) )
+        conn.commit()
+    return redirect(url_for("carrera"))
+
+@app.route('/carrera_editar/<string:id>')
+def carrera_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idCarrera, descripcion from carrera where idCarrera=%s', (id))
+    dato=cursor.fetchone()
+    return render_template('carrera_edi.html', comentar=dato)
+
+@app.route('/carrera_fedita/<string:id>', methods=['POST'])
+def carrera_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute("update carrera set descripcion=%s where idCarrera=%s", (desc, id))
+        conn.commit()
+    return redirect(url_for('carrera'))
+
+@app.route('/carrera_borrar/<string:id>')
+def carrera_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute("delete from carrera where idCarrera = {0}".format(id))
+    conn.commit()
+    return redirect(url_for("carrera"))
 
 
 @app.route('/puesto')
@@ -363,9 +412,5 @@ def puesto_fedita(idP):
             conn.commit()
     return redirect(url_for('puesto'))
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 97e12b4ddb4ba515de67126245ea158973e77a39
 if __name__ == "__main__":
     app.run(debug=True)
