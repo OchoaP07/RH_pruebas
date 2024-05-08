@@ -363,5 +363,9 @@ def puesto_fedita(idP):
             conn.commit()
     return redirect(url_for('puesto'))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97e12b4ddb4ba515de67126245ea158973e77a39
 if __name__ == "__main__":
     app.run(debug=True)
