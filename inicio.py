@@ -363,8 +363,5 @@ def puesto_fedita(idP):
     return redirect(url_for('puesto'))
 
 
-
-
 if __name__ == "__main__":
-    db_connection()
     app.run(debug=True)
