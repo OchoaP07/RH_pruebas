@@ -121,10 +121,6 @@ def escolaridad():
 def escolaridad_agregar():
     return render_template('escolaridad_agr.html')
 
-@app.route("/estado_agregar")
-def estado_agregar():
-    return render_template('estado_ag.html')
-
 @app.route("/escolaridad_fagrega", methods=['POST'])
 def escolaridad_fagrega():
     if request.method == 'POST':
@@ -142,6 +138,32 @@ def escolaridad_editar(id):
     cursor.execute('select idEscolaridad, descripcion from escolaridad where idEscolaridad=%s', (id)) 
     dato=cursor.fetchone()
     return render_template('escolaridad_edi.html', comentar=dato)
+
+@app.route('/estado_editar/<string:id>')
+def estado_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idEstadoCivil, descripcion from estado_civil where idEstadoCivil=%s', (id))
+    dato=cursor.fetchone()
+    return render_template('estado_edi.html', comentar=dato)
+
+@app.route('/estado_fedita/<string:id>', methods=['POST'])
+def estado_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update estado_civil set descripcion=%s where idEstadoCivil=%s', (desc, id))
+        conn.commit()
+    return redirect(url_for('estado'))
+
+@app.route('/estado_borrar/<string:id>')
+def estado_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute('delete from estado_civil where idEstadoCivil={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('estado'))
 
 @app.route('/escolaridad_fedita/<string:id>', methods=['POST'])
 def escolaridad_fedita(id):
@@ -170,6 +192,10 @@ def estado():
     cursor.execute('select idEstadoCivil, descripcion from estado_civil order by idEstadoCivil')
     datos = cursor.fetchall()
     return render_template('estado.html', comentarios=datos)
+
+@app.route("/estado_agregar")
+def estado_agregar():
+    return render_template('estado_ag.html')
 
 @app.route("/estado_fagrega", methods=['POST'])
 def estado_fagrega():
