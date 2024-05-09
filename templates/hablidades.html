@@ -2,32 +2,34 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
-    <tbody>
+<div class="tablass">
+  <table class="bordercolor">
+  <tbody>
     <tr>
-    <td color="FFFFFF" bgcolor="#465F5A" valign="top">
-    <right><h3><a href="/habilidades_agregar">Agregar Habilidades</a></h3></right>
-    <h3 class="center">HABILIDADES REGISTRADAS</h3>
-    <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
+   <td class="minap" valign="top">
+    <div class="mintit">
+      <h3 class="center">HABILIDADES REGISTRADAS</h3>
+    </div>
+    <table class="table table-dark table-hover" class="bordercolor">
     <thead>
       <tr>
-        <td color="white" bgcolor="blue">Descripcion</td>
-        <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"></td>
+        <td>Descripcion</td>
+        <td></td>
+        <td> <rigth><h2><a href="/habilidades_agregar"  class="btn btn-dark btn-sm">Agregar Habilidades</a></h2></rigth>  </td>
       </tr> 
     </thead>
     <tbody>
     {% for i in comentar %}
         <tr>
-        <td width="80%">
+        <td width="60%">
            {{i.1}}
         </td>
 
         <td bgcolor="#2B2D83" width="8%" class="center">
-        <a href="/habilidades_editar/{{i.0}}" >Editar</a>
+        <a href="/habilidades_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
         </td>
         <td bgcolor="#3C3EC5" width="8%" class="center">
-        <a href="/habilidades_borrar/{{i.0}}">Borrar</a>
+        <a href="/habilidades_borrar/{{i.0}}"  class="btn btn-outline-primary btn-sm">Borrar</a>
         </td>
         </tr>
     {% endfor %}
@@ -37,4 +39,5 @@
     </tr>
     </tbody>
     </table>
+  </div>
 {% endblock %}
