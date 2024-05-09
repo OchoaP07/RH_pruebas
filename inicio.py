@@ -139,32 +139,6 @@ def escolaridad_editar(id):
     dato=cursor.fetchone()
     return render_template('escolaridad_edi.html', comentar=dato)
 
-@app.route('/estado_editar/<string:id>')
-def estado_editar(id):
-    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
-    cursor=conn.cursor()
-    cursor.execute('select idEstadoCivil, descripcion from estado_civil where idEstadoCivil=%s', (id))
-    dato=cursor.fetchone()
-    return render_template('estado_edi.html', comentar=dato)
-
-@app.route('/estado_fedita/<string:id>', methods=['POST'])
-def estado_fedita(id):
-    if request.method == 'POST':
-        desc = request.form['descripcion']
-        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
-        cursor = conn.cursor()
-        cursor.execute('update estado_civil set descripcion=%s where idEstadoCivil=%s', (desc, id))
-        conn.commit()
-    return redirect(url_for('estado'))
-
-@app.route('/estado_borrar/<string:id>')
-def estado_borrar(id):
-    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
-    cursor=conn.cursor()
-    cursor.execute('delete from estado_civil where idEstadoCivil={0}'.format(id))
-    conn.commit()
-    return redirect(url_for('estado'))
-
 @app.route('/escolaridad_fedita/<string:id>', methods=['POST'])
 def escolaridad_fedita(id):
     if request.method == 'POST':
@@ -206,6 +180,182 @@ def estado_fagrega():
         cursor.execute("insert into estado_civil (descripcion) values (%s)", (desc))
         conn.commit()
     return redirect(url_for("estado"))
+
+@app.route('/estado_editar/<string:id>')
+def estado_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idEstadoCivil, descripcion from estado_civil where idEstadoCivil=%s', (id))
+    dato=cursor.fetchone()
+    return render_template('estado_edi.html', comentar=dato)
+
+@app.route('/estado_fedita/<string:id>', methods=['POST'])
+def estado_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update estado_civil set descripcion=%s where idEstadoCivil=%s', (desc, id))
+        conn.commit()
+    return redirect(url_for('estado'))
+
+@app.route('/estado_borrar/<string:id>')
+def estado_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute('delete from estado_civil where idEstadoCivil={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('estado'))
+
+#Grado de avance
+
+@app.route('/grado')
+def grado():
+    conn=pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance order by idGradoAvance')
+    datos = cursor.fetchall()
+    return render_template('grado.html', comentarios=datos)
+
+@app.route('/grado_agregar')
+def grado_agregar():
+    return render_template('grado_ag.html')
+
+@app.route('/grado_fagrega', methods=['POST'])
+def grado_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn=pymysql.connect(host="localhost", user="root", passwd="", db="rh3")
+        cursor= conn.cursor()
+        cursor.execute("insert into grado_avance (descripcion) values (%s)", (desc))
+        conn.commit()
+    return redirect(url_for("grado"))
+
+@app.route("/grado_editar/<string:id>")
+def grado_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance where idGradoAvance=%s', (id))
+    dato=cursor.fetchone()
+    return render_template("grado_edi.html", comentar=dato)
+
+@app.route('/grado_fedita/<string:id>', methods=['POST'])
+def grado_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update grado_avance set descripcion=%s where idGradoAvance=%s', (desc, id))
+        conn.commit()
+    return redirect(url_for('grado'))
+
+@app.route('/grado_borrar/<string:id>')
+def grado_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute('delete from grado_avance where idGradoAvance={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('grado'))
+
+#Habilidades
+
+@app.route('/habilidades')
+def habilidades():
+    conn=pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad order by idHabilidad')
+    datos = cursor.fetchall()
+    return render_template('hablidades.html', comentar=datos)
+
+@app.route('/habilidades_agregar')
+def habilidades_agregar():
+    return render_template('habilidades_ag.html')
+
+@app.route('/habilidades_fagrega', methods=['POST'])
+def habilidades_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn=pymysql.connect(host="localhost", user="root", passwd="", db="rh3")
+        cursor= conn.cursor()
+        cursor.execute("insert into habilidad (descripcion) values (%s)", (desc))
+        conn.commit()
+    return redirect(url_for("habilidades"))
+
+@app.route("/habilidades_editar/<string:id>")
+def habilidades_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad where idHabilidad=%s', (id))
+    dato=cursor.fetchone()
+    return render_template("habilidades_edi.html", comentar=dato)
+
+@app.route('/habilidades_fedita/<string:id>', methods=['POST'])
+def habilidades_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update habilidad set descripcion=%s where idHabilidad=%s', (desc, id))
+        conn.commit()
+    return redirect(url_for('habilidades'))
+
+@app.route('/habilidades_borrar/<string:id>')
+def habilidades_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute('delete from habilidad where idHabilidad={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('habilidades'))
+
+#Idiomas
+
+@app.route('/idioma')
+def idioma():
+    conn=pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma order by idIdioma')
+    datos = cursor.fetchall()
+    return render_template('idioma.html', comentarios=datos)
+
+@app.route('/idioma_agregar')
+def idioma_agregar():
+    return render_template('idioma_ag.html')
+
+@app.route('/idioma_fagrega', methods=['POST'])
+def idioma_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn=pymysql.connect(host="localhost", user="root", passwd="", db="rh3")
+        cursor= conn.cursor()
+        cursor.execute("insert into idioma (descripcion) values (%s)", (desc))
+        conn.commit()
+    return redirect(url_for("idioma"))
+
+@app.route("/idioma_editar/<string:id>")
+def idioma_editar(id):
+    conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor=conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma where idIdioma=%s', (id))
+    dato=cursor.fetchone()
+    return render_template("idioma_edi.html", comentar=dato)
+
+@app.route('/idioma_fedita/<string:id>', methods=['POST'])
+def idioma_fedita(id):
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update idioma set descripcion=%s where idIdioma=%s', (desc, id))
+        conn.commit()
+    return redirect(url_for('idioma'))
+
+@app.route('/idioma_borrar/<string:id>')
+def idioma_borrar(id):
+    conn= pymysql.connect(host="Localhost", user="root", passwd="", db="rh3")
+    cursor=conn.cursor()
+    cursor.execute('delete from idioma where idIdioma={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('idioma'))
 
 @app.route('/puesto')
 def puesto():
