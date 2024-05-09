@@ -6,7 +6,7 @@
     <tr>
     <td color="FFFFFF" bgcolor="#465F5A" valign="top">
     <right><h3><a href="/carrera_agregar">Agregar Carrera</a></h3></right>
-    <center><h3>CARRERAS REGISTRADAS</h3></center>
+    <h3 class="center">CARRERAS REGISTRADAS</h3>
     <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
     <thead>
       <tr>
@@ -22,11 +22,11 @@
            {{i.1}}
         </td>
 
-        <td bgcolor="#2B2D83" width="8%">
-        <center><a href="/carrera_editar/{{i.0}}" >Editar</a></center>
+        <td bgcolor="#2B2D83" width="8%" class="center">
+        <a href="/carrera_editar/{{i.0}}" >Editar</a>
         </td>
-        <td bgcolor="#3C3EC5" width="8%">
-        <center><a href="/carrera_borrar/{{i.0}}">Borrar</a></center>
+        <td bgcolor="#3C3EC5" width="8%" class="center">
+        <a href="/carrera_borrar/{{i.0}}">Borrar</a>
         </td>
         </tr>
     {% endfor %}
