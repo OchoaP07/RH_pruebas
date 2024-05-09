@@ -6,6 +6,7 @@
 body{
     background: rgb(0, 0, 0);
     background: radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(27, 27, 27) 35%, rgb(83, 83, 83) 100%);
+    margin:"80%";
 }
 
 nav{
