@@ -22,8 +22,8 @@ def area_editar(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
     cursor.execute('select idArea, descripcion from area where idArea = %s', (id))
-    dato  = cursor.fetchall()
-    return render_template("area_edi.html", comentar=dato[0])
+    dato  = cursor.fetchone()
+    return render_template("area_edi.html", comentar=dato)
 
 @app.route('/area_fedita/<string:id>',methods=['POST'])
 def area_fedita(id):
