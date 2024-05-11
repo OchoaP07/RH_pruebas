@@ -662,5 +662,16 @@ def puesto_fedita(idP):
             conn.commit()
     return redirect(url_for('puesto'))
 
+#requisicion
+
+@app.route('/requisicion')
+def requisicion():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion')
+    datos = cursor.fetchall()
+    return render_template("requisicion.html",req=datos, folio="", elab="", recluta="",inicvac="",
+                           motivo="",motes="",tipo="",nomsoli="", nomauto="", nomrevi="",)
+
 if __name__ == "__main__":
     app.run(debug=True)
