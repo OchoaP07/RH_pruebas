@@ -7,32 +7,32 @@
     <tbody>
     <tr>
     <td color="FFFFFF" bgcolor="#465F5A" valign="top">
-    <h3 class="center">PUESTOS REGISTRADOS</h3>
+    <h3 class="center">VACANTES REGISTRADOS</h3>
     <table class="table table-dark table-hover" width="100%" border="1" cellpadding="0" bordercolor="#000000">
     <thead>
       <tr>
-        <td color="white" bgcolor="blue">Nombre del puesto</td>
+        <td color="white" bgcolor="blue">Vacante</td>
 
         <td color="white" bgcolor="black"></td>
         <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"> <rigth><h2><a href="/puesto_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
+        <td color="white" bgcolor="black"> <rigth><h2><a href="/vacante_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
       </tr>
     </thead>
     <tbody>
-    {% for i in pue %}
+    {% for i in vac %}
         <tr>
         <td width="80%">
            {{i.1}}
         </td>
 
         <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/puesto_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
+        <a href="/vacantes_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
         </td>
         <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/puesto_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
+        <a href="/vacantes_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
         </td>
         <td bgcolor="#3C3EC5" width="6%" class="center">
-        <a href="/puesto_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
+        <a href="/vacantes_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
         </td>
         </tr>
     {% endfor %}
