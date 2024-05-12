@@ -673,11 +673,20 @@ def requisicion():
     return render_template("requisicion.html", req=datos, folio="", elab="", recluta="", inicvac="",
                            motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
 
-@app.route('/requisicion_fedita/<string:idr>')
-def requisicion_editar():
-    return redirect(url_for('requisicion_fedita.html'))
+@app.route('/requisicion_fdetalle/<string:req>', methods=['GET'])
+def requisicion_fdetalle(req):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idrequisicion from requisicion order by idrequisicion')
+    datos = cursor.fetchall()
+    return render_template("requisicion.html",req = datos,folio="", elab="", recluta="", inicvac="",
+                           motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
 
-@app.route('/requisicion_edi/<string:idr>', methods=['POST'])
+@app.route('/requisicion_fedita/<string:req>')
+def requisicion_editar():
+    return redirect(url_for('requisicion_edi.html'))
+
+@app.route('/requisicion_edi/<string:req>', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -690,14 +699,16 @@ def requisicion_fedita():
         nomsoli = request.form['nomSolicita']
         nomauto = request.form['nomAutoriza']
         nomrevi = request.form['nomRevisa']
+
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
+
         cursor.execute('UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
                        'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
                        'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
                        (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion'))
+        return redirect(url_for('requisicion_edi'))
 
 @app.route('/requisicion_fagrega2')
 def requisicion_agregar():
@@ -723,22 +734,35 @@ def requisicion_fagrega():
                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                        (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion'))
+        return redirect(url_for('requisicion_fagrega2'))
+    
+@app.route('/requisicion_borrar')
+def requisicion_borrar(req):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (req,))
+    return redirect(url_for('requisicion'))
 
 @app.route('/vacantes')
 def vacantes():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('SELECT idVacante FROM requisicion ORDER BY idRequisicion')
+    cursor.execute('SELECT idVacante FROM vacante ORDER BY idVacante')
     datos = cursor.fetchall()
-    return render_template("requisicion.html", vac=datos, folio="", elab="", recluta="", inicvac="",
-                           motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
+    return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
+                           Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
 
-@app.route('/requisicion_borrar/<string:idr>')
-def requisicion_borrar(idr):
+
+@app.route('/candidatos')
+def candidatos():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (idr,))
-    return redirect(url_for('requisicion'))
+    cursor.execute('SELECT idCandidato FROM candidato ORDER BY idCandidato')
+    datos = cursor.fetchall()
+    return render_template("candidatos.html", can=datos, idC="", idV="", idR="", Pjf="", curp="", rfc="", nom="", 
+                           calle="", numEI="", domC="", tel="", tel2="", correoE="", edad="", sexo="", Ecivil="", 
+                           GAva="", carrera="", esr="", esP="", esR="", emR="", emP="", emr="", epR="", epP="", epr="",
+                           epR="", epP="", epr="", etR="", etP="", etr="", ecR="", ecP="", ecr="", efR="", efP="", efr="")
+
 if __name__ == "__main__":
     app.run(debug=True)
