@@ -1,9 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3>
-     <b class="center"> Agregar Area </b> 
-      
-</h3>
    <br>
    <br>
    <br>
@@ -11,13 +7,14 @@
    <div class="container">
           <div class="form-row">
                <div class="col-xs-12 ">
-                <div class="mb-3">
-                      <label for="descripcion" class="form-label">Area</label>
+                <div class="mb-3" class="minap">
+                      <label for="descripcion" class="minap">Agregar Área</label>
                       <input type="text" class="form-control" name="descripcion" id="descripcion"></input>
                 </div>
+                
                 </div>
           </div>
     </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-outline-light">Enviar</button>
 </form>
 {% endblock %}
