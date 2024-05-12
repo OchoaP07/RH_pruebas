@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<center>
-   <span class="minaps"> Puesto </span>
-</center>
+
 
 <form class="row g-3"  action="/puesto_fedita/{{dat.0}}" method="post">
+   <h3 class="center">
+      <b class="mintit">Editar Puesto: </b> 
+  </h3>
    <div class="col-md-6">
       <label for="codPuesto" class="minap">Código de Puesto</label>
       <input type="text" class="form-control" name="codPuesto" id="codPuesto" value="{{dat.1}}"></input>
