@@ -1,151 +1,103 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3>
-    <center><b>Agregar Puesto</b></center>
-    <b class="center"> Agregar Puesto </b>
-</h3>
-
-<br>
-<form class="row g-3" action="/puesto_fagrega2" method="post">
-    <div class="col-md-6">
-        <label for="codPuesto" class="form-label">Código de Puesto</label>
-        <input type="text" class="form-control" name="codPuesto" id="codPuesto">
+<div class="mintit">
+    <center><h3 class="center">EXAMEN PSICOMETRICO</h3></center>
+</div>
+<form class="row g-3" action="/examen_enviar" method="post">
+    <div class="col-md-12">
+        <label  class="minap">Nombre:</label>
+        <input type="text" class="form-control" name="nombre" id="nombre">
     </div>
-    <div class="col-md-6">
-        <label for="idArea" class="form-label">Área de adscripción</label>
-        <select name="idArea" id="idArea" class="form-select">
+    <div class="col-md-12">
+        <label  class="minap">1- ¿Usted cuenta con una mala nutricion y digestion?</label>
+        <input type="text" class="form-control" name="p1" id="p1">
+    </div>
+    <div class="col-md-12">
+        <label  class="minap">2- ¿Cual es tu mayor fortaleza y como la usas en tu vida cotidiana?</label>
+        <input type="text" class="form-control" name="p2" id="p2">
+    </div>
+    <div class="col-md-12">
+        <label for="actividades" class="minap">3- ¿Cual de las siguientes actividades prefieres para relajarte despues de un dia estresante?</label>
+        <select name="p3" id="p3" class="form-select">
             <option selected="true" disabled="disabled">Elige...</option>
-            {% for i in catArea %}
-                <option value="{{ i.0 }}">{{ i.1 }}</option>
-            {% endfor %}
+            <option value="leer">Leer un libro</option>
+            <option value="ejercicio">Hacer ejercicio</option>
+            <option value="musica">Escuchar musica</option>
+            <option value="meditar">Meditar</option>
         </select>
     </div>
     <div class="col-md-12">
-        <label for="nomPuesto" class="form-label">Nombre del Puesto</label>
-        <input type="text" class="form-control" name="nomPuesto" id="nomPuesto">
+        <label class="minap">4- ¿Cómo manejas los conflictos interpersonales en el trabajo o en la escuela?</label>
+        <input type="text" class="form-control" name="p4" id="p4">
     </div>
     <div class="col-md-12">
-        <label for="puestoJefeSup" class="form-label">Puesto del Jefe Superior</label>
-        <input type="text" class="form-control" name="puestoJefeSup" id="puestoJefeSup">
-    </div>
-    <div class="col-md-8">
-        <label for="jornada" class="form-label">Jornada</label>
-        <input type="text" class="form-control" name="jornada" id="jornada">
-    </div>
-    <div class="col-md-4">
-        <label for="remunMensual" class="form-label">Remuneración Mensual</label>
-        <input type="text" class="form-control" name="remunMensual" id="remunMensual">
-    </div>
-    <div class="col-md-12">
-        <label for="prestaciones" class="form-label">Prestaciones</label>
-        <input type="text" class="form-control" name="prestaciones" id="prestaciones">
-    </div>
-    <div class="col-md-12">
-        <label for="descripcionGeneral" class="form-label">Descripción General</label>
-        <input type="text" class="form-control" name="descripcionGeneral" id="descripcionGeneral">
-    </div>
-    <div class="col-md-12">
-        <label for="funciones" class="form-label">Funciones</label>
-        <input type="text" class="form-control" name="funciones" id="funciones">
-    </div>
-    <div class="col-md-4">
-        <label for="edad" class="form-label">Edad</label>
-        <input type="text" class="form-control" name="edad" id="edad">
-    </div>
-    <div class="col-md-4">
-        <label for="sexo" class="form-label">Sexo</label>
-        <select name="sexo" id="sexo" class="form-select">
+        <label class="minap">5- ¿Qué actividad te resulta más gratificante?</label>
+        <select name="p5" id="p5" class="form-select">
             <option selected="true" disabled="disabled">Elige...</option>
-            <option value="Indistinto">Indistinto</option>
-            <option value="Hombre">Hombre</option>
-            <option value="Mujer">Mujer</option>
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="idEstadoCivil" class="form-label">Estado Civil</label>
-        <select name="idEstadoCivil" id="idEstadoCivil" class="form-select">
-            <option selected="true" disabled="disabled">Elige...</option>
-            {% for i in catEdoCivil %}
-                <option value="{{ i.0 }}">{{ i.1 }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="idEscolaridad" class="form-label">Escolaridad</label>
-        <select name="idEscolaridad" id="idEscolaridad" class="form-select" onChange="miFunc1()">
-            <option selected="true" disabled="disabled">Elige...</option>
-            {% for i in catEscolaridad %}
-                <option value="{{ i.0 }}">{{ i.1 }}</option>
-            {% endfor %}
-        </select>
-        <script>
-            function miFunc1() {
-                var esco = document.getElementById('idEscolaridad').value;
-                if (esco == 1) {
-                    document.getElementById('idGradoAvance').disabled = true;
-                    document.getElementById('idCarrera').disabled = true;
-                } else {
-                    document.getElementById('idGradoAvance').disabled = false;
-                    document.getElementById('idCarrera').disabled = false;
-                }
-            }
-        </script>
-    </div>
-    <div class="col-md-4">
-        <label for="idGradoAvance" class="form-label">Grado Avance</label>
-        <select name="idGradoAvance" id="idGradoAvance" class="form-select">
-            <option selected="true" disabled="disabled">Elige...</option>
-            {% for i in catGradoAvance %}
-                <option value="{{ i.0 }}">{{ i.1 }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="idCarrera" class="form-label">Carrera / Especialidad</label>
-        <select name="idCarrera" id="idCarrera" class="form-select">
-            <option selected="true" disabled="disabled">Elige...</option>
-            {% for i in catCarrera %}
-                <option value="{{ i.0 }}">{{ i.1 }}</option>
-            {% endfor %}
+            <option value="ayudar">Ayudar a otros</option>
+            <option value="metas">Lograr metas personales</option>
+            <option value="aprender">Aprender algo nuevo</option>
+            <option value="pasar">Pasar tiempo con amigos y familiares</option>
         </select>
     </div>
     <div class="col-md-12">
-        <label for="experiencia" class="form-label">Experiencia</label>
-        <input type="text" class="form-control" name="experiencia" id="experiencia">
+        <label class="minap">6- ¿Cuál de las siguientes afirmaciones describe mejor tu enfoque hacia los desafíos?</label>
+        <select name="p6" id="p6" class="form-select">
+            <option selected="true" disabled="disabled">Elige...</option>
+            <option value="ayudar">Evito los desafíos siempre que sea posible</option>
+            <option value="metas">Me enfrento a los desafíos con determinación</option>
+            <option value="aprender">Me siento abrumado por los desafíos</option>
+            <option value="pasar">Me gusta tomar desafíos solo si son fáciles de resolver</option>
+        </select>
     </div>
     <div class="col-md-12">
-        <label for="conocimientos" class="form-label">Conocimientos</label>
-        <input type="text" class="form-control" name="conocimientos" id="conocimientos">
+        <label class="minap">7- ¿Cómo te adaptas a trabajar en equipo?</label>
+        <input type="text" class="form-control" name="p7" id="p7">
     </div>
     <div class="col-md-12">
-        <label para="manejoEquipo" class="form-label">Manejo de Equipo</label>
-        <input type="text" class="form-control" name="manejoEquipo" id="manejoEquipo">
+        <label class="minap">8- Contesta lo siguiente</label><br>
+        <img class="image" src="/static/imagenes/psicometrico1.jpg"><br><br>
+        <select name="p8" id="p8" class="form-select">
+            <option selected="true" disabled="disabled">Elige...</option>
+            <option value="a">A)</option>
+            <option value="b">B)</option>
+            <option value="c">C)</option>
+            <option value="d">D)</option>
+        </select>
     </div>
     <div class="col-md-12">
-        <label para="reqFisicos" class="form-label">Requisitos Físicos</label>
-        <input type="text" class="form-control" name="reqFisicos" id="reqFisicos">
+        <label class="minap">9- Contesta lo siguiente</label><br>
+        <img class="image" src="/static/imagenes/psicometrico2.jpg"><br><br>
+        <select name="p9" id="p9" class="form-select">
+            <option selected="true" disabled="disabled">Elige...</option>
+            <option value="a">A)</option>
+            <option value="b">B)</option>
+            <option value="c">C)</option>
+            <option value="d">D)</option>
+        </select>
     </div>
     <div class="col-md-12">
-        <label para="reqPsicologicos" class="form-label">Requisitos Psicológicos</label>
-        <input type="text" class="form-control" name="reqPsicologicos" id="reqPsicologicos">
+        <label class="minap">10- ¿Es alergico a algun alimento?</label>
+        <select name="p10" id="p10" class="form-select">
+            <option selected="true" disabled="disabled">Elige...</option>
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
     </div>
     <div class="col-md-12">
-        <label para="responsabilidades" class="form-label">Responsabilidades</label>
-        <input type="text" class="form-control" name="responsabilidades" id="responsabilidades">
+        <label class="minap">11- ¿Tiene baja resistencia, dificultad para respirar al realizar algun ejercicio?</label>
+        <select name="p11" id="p11" class="form-select">
+            <option selected="true" disabled="disabled">Elige...</option>
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
     </div>
     <div class="col-md-12">
-        <label para="condicionesTrabajo" class="form-label">Condiciones de Trabajo</label>
-        <input type="text" class="form-control" name="condicionesTrabajo" id="condicionesTrabajo">
+        <label  class="minap">12- ¿Cómo te sientes acerca de recibir retroalimentación sobre tu trabajo?</label>
+        <input type="text" class="form-control" name="p12" id="p12">
     </div>
-    <div class="col-6">
-        <span>Idiomas:</span>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="i1" id="i1" onChange="miFunc2()">
-            <label class="form-check-label" for="i1">NO REQUERIDO</label>
-        </div>
-
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-outline-light">Enviar</button>
          </div>
       </div>
    </form>

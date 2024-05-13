@@ -477,6 +477,21 @@ INSERT INTO `requisicion` (`idRequisicion`, `folio`, `fechaElab`, `fechaRecluta`
 (1, '1', '0000-00-00', '0000-00-00', '0000-00-00', '1', '', '', 'LUIS, JEFE DE VENTAS', 'luis', 'juan', 1, 1, 1),
 (10, '2', '2023-11-23', '2023-11-27', '2023-12-01', 'Otro', 'temporada', 'Temporal', 'LUIS, JEFE DE VENTAS', 'luis', 'juan', 1, 1, 1);
 
+
+--Tabla de examenes--
+CREATE TABLE IF NOT EXISTS 'examen'(
+  'idExamen' int(11) NOT NULL AUTO_INCREMENT, 
+  'nombre' varchar(70) NOT NULL,
+  'preg1' varchar(250) NOT NULL,
+  'preg2' varchar(250) NOT NULL,
+  'preg3' varchar(250) NOT NULL,
+  'preg4' varchar(250) NOT NULL,
+  'preg5' varchar(250) NOT NULL,
+  'preg6' varchar(250) NOT NULL,
+  'preg7' varchar(250) NOT NULL,
+)
+
+
 -- --------------------------------------------------------
 
 --

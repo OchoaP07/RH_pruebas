@@ -753,6 +753,11 @@ def vacantes():
     return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
                            Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
 
+#examen psicometrico
+@app.route('/examen')
+def examen():
+    return render_template('examen.html')
+
 
 
 if __name__ == "__main__":
