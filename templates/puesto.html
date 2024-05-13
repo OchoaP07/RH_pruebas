@@ -15,7 +15,7 @@
         <td >Nombre del puesto</td>
         <td ></td>
         <td ></td>
-        <td > <rigth><h2><a href="/puesto_agrOp2"  class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
+        <td > <rigth><h2><a href="/puesto_agrOp2"  class="btn btn-dark btn-sm">Agregar Puesto</a></h2></rigth>  </td>
       </tr>
     </thead>
     <tbody>
@@ -25,13 +25,13 @@
            {{i.1}}
         </td>
 
-        <td bgcolor="#2B2D83" width="6%" class="center">
+        <td width="6%" class="center">
         <a href="/puesto_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
         </td>
-        <td bgcolor="#2B2D83" width="6%" class="center">
+        <td  width="6%" class="center">
         <a href="/puesto_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
         </td>
-        <td bgcolor="#3C3EC5" width="6%" class="center">
+        <td  width="6%" class="center">
         <a href="/puesto_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
         </td>
         </tr>
@@ -44,7 +44,7 @@
     </table>
 </div>
 <form class="row g-3"  action="/puesto_fdetalle/" method="GET">
-    <h3 class="center">
+    <h3 >
         <b class="mintit"> Detalle: </b> 
     </h3>
    <div class="col-md-12">
