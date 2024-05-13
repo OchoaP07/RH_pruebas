@@ -49,60 +49,42 @@
    <h3>
       <b class="mintit"> Detalle: </b>
   </h3>
-   <div class="col-md-6">
-      <label for="nomPuesto" class="form-label">Nombre del Puesto</label>
-      <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{NomP.1}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-6">
-      <label for="idPuesto" class="form-label">id puesto</label>
-      <input type="text" class="form-control" name="idPuesto" id="idPuesto" value="{{idPu.10}}" readonly="readonly"></input>
-  </div>
-   <br>
+
    <div class="col-md-6">
       <label for="fuenteCandidato" class="form-label">Fuente de candidato</label>
-      <input type="text" class="form-control" name="fuenteCandidato" id="fuenteCandidato" value="{{FuenteC.2}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="fuenteCandidato" id="fuenteCandidato" value="{{dato.2}}" readonly="readonly"></input>
    </div>
    <div class="col-md-6">
       <label for="inicioFechaPublic" class="form-label">Fecha de publicacion</label>
-      <input type="text" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic" value="{{FechaP.3}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic" value="{{dato.3}}" readonly="readonly"></input>
 
    </div>
    <div class="col-md-12">
       <label for="finFechaPublic" class="form-label">Fecha de expiracion</label>
-      <input type="text" class="form-control" name="finFechaPublic" id="finFechaPublic" value="{{FechaE.4}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="finFechaPublic" id="finFechaPublic" value="{{dato.4}}" readonly="readonly"></input>
    </div>
    <div class="col-md-8">
       <label for="Publicada" class="form-label">Publicada</label>
-      <input type="text" class="form-control" name="Publicada" id="Publicada" value="{{Pub.5}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="Publicada" id="Publicada" value="{{dato.5}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
       <label for="observaciones" class="form-label">observaciones</label>
-      <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{Obs.6}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{dato.6}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
       <label for="candidactoSelecc" class="form-label">Seleccion de candidacto</label>
-      <input type="text" class="form-control" name="candidactoSelecc" id="candidactoSelecc" value="{{SeleC.7}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="candidactoSelecc" id="candidactoSelecc" value="{{dato.7}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
       <label for="fechaContratacion" class="form-label">Fecha de contratacion</label>
-      <input type="text" class="form-control" name="fechaContratacion" id="fechaContratacion" value="{{FechaC.8}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="fechaContratacion" id="fechaContratacion" value="{{dato.8}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-       <label for="idRequisicion" class="form-label">id Requisicion</label>
-       <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{idRe.9}}" readonly="readonly"></input>
+       <label for="idr4v  " class="form-label">id requisicion</label>
+       <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{dato.9}}" readonly="readonly"></input>
    </div>
-   <div class="col-6">
-      <span class="minap">Idiomas:</span>
-          {% for idio in catIdioma  %}
-              <input type="text" class="form-control" name="i{{idio.1}}" id="i{{idio.1}}" value="{{idio.2}}" readonly="readonly"></input>
-          {% endfor %}
-   </div>
-   <div class="col-6">
-     <span class="minap">Habilidades:</span>
-         {% for hab in catHabilidad %}
-              <input type="text" class="form-control" name="h{{hab.1}}" id="h{{hab.1}}" value="{{hab.2}}" readonly="readonly"></input>
-         {% endfor %}
-   </div> 
+
+   ]
 </form>
 
 {% endblock %}
