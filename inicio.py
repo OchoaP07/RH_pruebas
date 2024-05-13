@@ -740,7 +740,7 @@ def requisicion_fagrega():
 def requisicion_borrar(req):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (req,))
+    cursor.execute('DELETE FROM requisicion WHERE idRequisicion = %s', (req,))
     return redirect(url_for('requisicion'))
 
 #vacante
@@ -753,6 +753,49 @@ def vacantes():
     return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
                            Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
 
+@app.route('/vacantes_fdetalle/<string:idR>', methods=['GET'])
+def vacante_fdetalle(idV):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+
+    cursor.execute('select idVacante, fuenteCandidato from vacante order by idVacante')
+    datos = cursor.fetchall()
+
+    cursor.execute('select idVacante, conseVR, fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto from rewhere idVacante = %s', (idV))
+    dato = cursor.fetchall()
+
+    cursor.execute('select a.idVacante, a.descripcion from area a, puesto b where a.idArea = b.idArea and b.idPuesto = %s', (idV))
+    datos1 = cursor.fetchall()
+
+    cursor.execute('select a.idEstadoCivil, a.descripcion from estado_civil a, puesto b where a.idEstadoCivil = b.idEstadoCivil and b.idPuesto = %s', (idV))
+    datos2 = cursor.fetchall()
+
+    cursor.execute('select a.idEscolaridad, a.descripcion from escolaridad a, puesto b where a.idEscolaridad = b.idEscolaridad and b.idPuesto = %s', (idV))
+    datos3 = cursor.fetchall()
+
+    cursor.execute('select a.idGradoAvance, a.descripcion from grado_avance a, puesto b where a.idGradoAvance = b.idGradoAvance and b.idPuesto = %s', (idV))
+    datos4 = cursor.fetchall()
+
+    cursor.execute('select a.idCarrera, a.descripcion from carrera a, puesto b where a.idCarrera = b.idCarrera and b.idPuesto = %s', (idV))
+    datos5 = cursor.fetchall()
+
+    cursor.execute('select a.idPuesto from puesto a, idioma b, puesto_has_idioma c '
+                   'where a.idPuesto = c.idPuesto and b.idIdioma = c.idIdioma and a.idPuesto = %s', (idV))
+    datos6 = cursor.fetchall()
+
+    cursor.execute('select a.idPuesto, b.idHabilidad, b.descripcion from puesto a, habilidad b, puesto_has_habilidad c '
+                   'where a.idPuesto = c.idPuesto and b.idHabilidad = c.idHabilidad and a.idPuesto = %s', (idV))
+    datos7 = cursor.fetchall()
+    return render_template("puesto.html", pue = datos, dat=dato[0], catArea=datos1[0], catEdoCivil=datos2[0], catEscolaridad=datos3[0],
+                           catGradoAvance=datos4[0], catCarrera=datos5[0], catIdioma=datos6, catHabilidad=datos7)
+
+
+@app.route('/vacante_borrar')
+def vacante_borrar(vac):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
+    return redirect(url_for('vacantes.html'))
 
 
 if __name__ == "__main__":
