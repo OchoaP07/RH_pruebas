@@ -750,8 +750,8 @@ def vacantes():
     cursor = conn.cursor()
     cursor.execute('SELECT idVacante, fuenteCandidato FROM vacante ORDER BY idVacante')
     datos = cursor.fetchall()
-    return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
-                           Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
+    return render_template("vacantes.html", vac=datos, NomP=" ", FuenteC=" ", FechaP=" ", FechaE=" ",
+                           Pub=" ", Obs=" ", tipo=" ", SeleC=" ", FechaC=" ", idRe=" ",idPu=" ")
 
 @app.route('/vacantes_fdetalle/<string:idR>', methods=['GET'])
 def vacante_fdetalle(idV):
@@ -761,10 +761,29 @@ def vacante_fdetalle(idV):
     cursor.execute('select idVacante from vacante order by idVacante')
     datos = cursor.fetchall()
 
-    cursor.execute('select idVacante, conseVR, fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto from rewhere idVacante = %s', (idV))
-    dato = cursor.fetchall()
+    cursor.execute('select fuenteCandidato from rewhere idVacante = %s', (idV))
+    dato1 = cursor.fetchall()
 
-    return render_template("puesto.html", pue = datos, dato=dato[0])
+    cursor.execute('select publicada from rewhere idVacante = %s', (idV))
+    dato2 = cursor.fetchall()
+
+    cursor.execute('select  observaciones from rewhere idVacante = %s', (idV))
+    dato3 = cursor.fetchall()
+
+    cursor.execute('select  candidatoSelecc from rewhere idVacante = %s', (idV))
+    dato4 = cursor.fetchall()
+
+    cursor.execute('select  fechaContratacion from rewhere idVacante = %s', (idV))
+    dato5 = cursor.fetchall()
+
+    cursor.execute('select idRequisicion from rewhere idRacante = %s', (idV))
+    dato6 = cursor.fetchall()
+
+    cursor.execute('select f idPuesto from rewhere idPacante = %s', (idV))
+    dato7 = cursor.fetchall()
+    
+    return render_template("puesto.html", pue = datos, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
+                           Pub=dato4, Obs=dato3, SeleC=dato6, FechaC=" ", idRe=dato6,idPu=dato7)
 
 @app.route('/vacante_borrar')
 def vacante_borrar(vac):
