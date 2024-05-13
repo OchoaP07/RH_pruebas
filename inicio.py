@@ -743,26 +743,17 @@ def requisicion_borrar(req):
     cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (req,))
     return redirect(url_for('requisicion'))
 
+#vacante
 @app.route('/vacantes')
 def vacantes():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('SELECT idVacante FROM vacante ORDER BY idVacante')
+    cursor.execute('SELECT idVacante, fuenteCandidato FROM vacante ORDER BY idVacante')
     datos = cursor.fetchall()
     return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
                            Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
 
 
-@app.route('/candidatos')
-def candidatos():
-    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
-    cursor = conn.cursor()
-    cursor.execute('SELECT idCandidato FROM candidato ORDER BY idCandidato')
-    datos = cursor.fetchall()
-    return render_template("candidatos.html", can=datos, idC="", idV="", idR="", Pjf="", curp="", rfc="", nom="", 
-                           calle="", numEI="", domC="", tel="", tel2="", correoE="", edad="", sexo="", Ecivil="", 
-                           GAva="", carrera="", esr="", esP="", esR="", emR="", emP="", emr="", epR="", epP="", epr="",
-                           epR="", epP="", epr="", etR="", etP="", etr="", ecR="", ecP="", ecr="", efR="", efP="", efr="")
 
 if __name__ == "__main__":
     app.run(debug=True)
