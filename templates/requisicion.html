@@ -1,96 +1,94 @@
 {% extends "layout.html" %}
 {% block content %}
-
-
-    <table  width="100%" border="1" cellpadding="0" bordercolor="#000000">
+<table width="100%" border="1" cellpadding="0" bordercolor="#000000">
     <tbody>
-    <tr>
-    <td color="FFFFFF" bgcolor="#465F5A" valign="top">
-    <h3 class="center">PUESTOS REGISTRADOS</h3>
-    <table class="table table-dark table-hover" width="100%" border="1" cellpadding="0" bordercolor="#000000">
-    <thead>
-      <tr>
-        <td color="white" bgcolor="blue">Motivo de requisicion</td>
-
-        <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"> <rigth><h2><a href="/requisicion_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
-      </tr>
-    </thead>
-    <tbody>
-    {% for i in req %}
         <tr>
-        <td width="80%">
-           {{i.1}}
-        </td>
-
-        <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/requisicion_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
-        </td>
-        <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/requisicion_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
-        </td>
-        <td bgcolor="#3C3EC5" width="6%" class="center">
-        <a href="/requisicion_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
-        </td>
+            <td color="FFFFFF" bgcolor="#465F5A" valign="top">
+                <h3 class="center">PUESTOS REGISTRADOS</h3>
+                <table class="table table-dark table-hover" width="100%" border="1" cellpadding="0" bordercolor="#000000">
+                    <thead>
+                        <tr>
+                            <td color="white" bgcolor="blue">Motivo de requisicion</td>
+                            <td color="white" bgcolor="black"></td>
+                            <td color="white" bgcolor="black"></td>
+                            <td color="white" bgcolor="black">
+                                <rigth><h2><a href="/requisicion_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in req %}
+                        <tr>
+                            <td width="80%">
+                                {{i.1}}
+                            </td>
+                            <td bgcolor="#2B2D83" width="6%" class="center">
+                                <a href="/requisicion_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
+                            </td>
+                            <td bgcolor="#2B2D83" width="6%" class="center">
+                                <a href="/requisicion_fedita/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
+                            </td>
+                            <td bgcolor="#3C3EC5" width="6%" class="center">
+                                <a href="/requisicion_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
         </tr>
-    {% endfor %}
     </tbody>
-    </table>
-    </td>
-    </tr>
-    </tbody>
-    </table>
+</table>
 <br>
 <h3>
-     <b class="center"> Detalle: </b> 
-
+    <b class="center"> Detalle: </b>
 </h3>
 <br>
-
-<form class="row g-3"  action="/requisicion_fdetalle/" method="GET">
-   <div class="col-md-12">
-      <label for="nomPuesto" class="form-label">Folio</label>
-      <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{folio.3}}" readonly="readonly"></input>
-   </div>
-   <br>
-   <div class="col-md-6">
-      <label for="codPuesto" class="form-label">Fecha de elaboracion</label>
-      <input type="text" class="form-control" name="codPuesto" id="codPuesto" value="{{elab.1}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-6">
-      <label for="idArea" class="form-label">fecha reclutamiento</label>
-      <input type="text" class="form-control" name="idArea" id="idArea" value="{{recluta.1}}" readonly="readonly"></input>
-
-   </div>
-   <div class="col-md-12">
-      <label for="puestoJefeSup" class="form-label">inicio vacante</label>
-      <input type="text" class="form-control" name="puestoJefeSup" id="puestoJefeSup" value="{{inicvac.4}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-8">
-      <label for="jornada" class="form-label">motivo</label>
-      <input type="text" class="form-control" name="jornada" id="jornada" value="{{motivo.5}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-4">
-      <label for="remunMensual" class="form-label">motivo especifique</label>
-      <input type="text" class="form-control" name="remunMensual" id="remunMensual" value="{{motes.6}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-12">
-      <label for="prestaciones" class="form-label">tipo</label>
-      <input type="text" class="form-control" name="prestaciones" id="prestaciones" value="{{tipo.7}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-12">
-      <label for="descripcionGeneral" class="form-label">nombre solicita</label>
-      <input type="text" class="form-control" name="descripcionGeneral" id="descripcionGeneral" value="{{nomsoli.8}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-12">
-       <label for="funciones" class="form-label">nombre autoriza</label>
-       <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomauto.9}}" readonly="readonly"></input>
-   </div>
-   <div class="col-md-12">
-    <label for="funciones" class="form-label">nombre revisa</label>
-    <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomrevi.9}}" readonly="readonly"></input>
-</div>
+<form class="row g-3" action="/requisicion_fdetalle/{{idRequisicion}}" method="POST">
+    <div class="col-md-12">
+        <label for="nomPuesto" class="form-label">Folio</label>
+        <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{folio.3}}" readonly="readonly">
+    </div>
+    <br>
+    <div class="col-md-6">
+        <label for="codPuesto" class="form-label">Fecha de elaboracion</label>
+        <input type="text" class="form-control" name="codPuesto" id="codPuesto" value="{{elab.1}}" readonly="readonly">
+    </div>
+    <div class="col-md-6">
+        <label for="idArea" class="form-label">fecha reclutamiento</label>
+        <input type="text" class="form-control" name="idArea" id="idArea" value="{{recluta.1}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <label for="puestoJefeSup" class="form-label">inicio vacante</label>
+        <input type="text" class="form-control" name="puestoJefeSup" id="puestoJefeSup" value="{{inicvac.4}}" readonly="readonly">
+    </div>
+    <div class="col-md-8">
+        <label for="jornada" class="form-label">motivo</label>
+        <input type="text" class="form-control" name="jornada" id="jornada" value="{{motivo.5}}" readonly="readonly">
+    </div>
+    <div class="col-md-4">
+        <label for="remunMensual" class="form-label">motivo especifique</label>
+        <input type="text" class="form-control" name="remunMensual" id="remunMensual" value="{{motes.6}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <label for="prestaciones" class="form-label">tipo</label>
+        <input type="text" class="form-control" name="prestaciones" id="prestaciones" value="{{tipo.7}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <label for="descripcionGeneral" class="form-label">nombre solicita</label>
+        <input type="text" class="form-control" name="descripcionGeneral" id="descripcionGeneral" value="{{nomsoli.8}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <label for="funciones" class="form-label">nombre autoriza</label>
+        <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomauto.9}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <label for="funciones" class="form-label">nombre revisa</label>
+        <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomrevi.9}}" readonly="readonly">
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
 </form>
 
 {% endblock %}

@@ -670,8 +670,90 @@ def requisicion():
     cursor = conn.cursor()
     cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion')
     datos = cursor.fetchall()
-    return render_template("requisicion.html",req=datos, folio="", elab="", recluta="",inicvac="",
-                           motivo="",motes="",tipo="",nomsoli="", nomauto="", nomrevi="",)
+    return render_template("requisicion.html", req=datos, folio="", elab="", recluta="", inicvac="",
+                           motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
+
+@app.route('/requisicion_fdetalle/<string:req>', methods=['GET'])
+def requisicion_fdetalle(req):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idrequisicion from requisicion order by idrequisicion')
+    datos = cursor.fetchall()
+    return render_template("requisicion.html",req = datos,folio="", elab="", recluta="", inicvac="",
+                           motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
+
+@app.route('/requisicion_fedita/<string:req>')
+def requisicion_editar():
+    return redirect(url_for('requisicion_edi.html'))
+
+@app.route('/requisicion_edi/<string:req>', methods=['POST'])
+def requisicion_fedita():
+    if request.method == 'POST':
+        folio = request.form['folio']
+        elab = request.form['fechaElab']
+        recluta = request.form['fechaRecluta']
+        inicvac = request.form['fechaInicVac']
+        motivo = request.form['motivoRequisicion']
+        motes = request.form['motivoEspesifique']
+        tipo = request.form['tipoVacante']
+        nomsoli = request.form['nomSolicita']
+        nomauto = request.form['nomAutoriza']
+        nomrevi = request.form['nomRevisa']
+
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+
+        cursor.execute('UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
+                       'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
+                       'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
+                       (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+        conn.commit()
+        return redirect(url_for('requisicion_edi'))
+
+@app.route('/requisicion_fagrega2')
+def requisicion_agregar():
+    return render_template('requisicion_agrOp2.html')
+
+@app.route('/requisicion_fagrega2', methods=['POST'])
+def requisicion_fagrega():
+    if request.method == 'POST':
+        folio = request.form['folio']
+        elab = request.form['fechaElab']
+        recluta = request.form['fechaRecluta']
+        inicvac = request.form['fechaInicVac']
+        motivo = request.form['motivoRequisicion']
+        motes = request.form['motivoEspesifique']
+        tipo = request.form['tipoVacante']
+        nomsoli = request.form['nomSolicita']
+        nomauto = request.form['nomAutoriza']
+        nomrevi = request.form['nomRevisa']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO requisicion (folio, fechaElab, fechaRecluta, fechaInicVac, motivoRequisicion,'
+                       'motivoEspesifique, tipoVacante, nomSolicita, nomAutoriza, nomRevisa) '
+                       'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                       (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+        conn.commit()
+        return redirect(url_for('requisicion_fagrega2'))
+    
+@app.route('/requisicion_borrar')
+def requisicion_borrar(req):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (req,))
+    return redirect(url_for('requisicion'))
+
+#vacante
+@app.route('/vacantes')
+def vacantes():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('SELECT idVacante, fuenteCandidato FROM vacante ORDER BY idVacante')
+    datos = cursor.fetchall()
+    return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
+                           Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

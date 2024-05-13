@@ -7,32 +7,32 @@
     <tbody>
     <tr>
     <td color="FFFFFF" bgcolor="#465F5A" valign="top">
-    <h3 class="center">PUESTOS REGISTRADOS</h3>
+    <h3 class="center">VACANTES REGISTRADOS</h3>
     <table class="table table-dark table-hover" width="100%" border="1" cellpadding="0" bordercolor="#000000">
     <thead>
       <tr>
-        <td color="white" bgcolor="blue">Nombre del puesto</td>
+        <td color="white" bgcolor="blue">Vacante</td>
 
         <td color="white" bgcolor="black"></td>
         <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"> <rigth><h2><a href="/puesto_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
+        <td color="white" bgcolor="black"> <rigth><h2><a href="/vacante_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
       </tr>
     </thead>
     <tbody>
-    {% for i in pue %}
+    {% for i in vac %}
         <tr>
         <td width="80%">
            {{i.1}}
         </td>
 
         <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/puesto_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
+        <a href="/vacantes_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
         </td>
         <td bgcolor="#2B2D83" width="6%" class="center">
-        <a href="/puesto_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
+        <a href="/vacantes_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
         </td>
         <td bgcolor="#3C3EC5" width="6%" class="center">
-        <a href="/puesto_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
+        <a href="/vacantes_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
         </td>
         </tr>
     {% endfor %}
@@ -52,45 +52,46 @@
 <form class="row g-3"  action="/vacantes_fdetalle/" method="GET">
    <div class="col-md-12">
       <label for="nomPuesto" class="form-label">Nombre del Puesto</label>
-      <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{dat.3}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{NomP.3}}" readonly="readonly"></input>
    </div>
    <br>
    <div class="col-md-6">
       <label for="fuenteCandidato" class="form-label">Fuente de candidato</label>
-      <input type="text" class="form-control" name="fuenteCandidato" id="fuenteCandidato" value="{{dat.1}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="fuenteCandidato" id="fuenteCandidato" value="{{FuenteC.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-6">
       <label for="inicioFechaPublic" class="form-label">Fecha de publicacion</label>
-      <input type="text" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic" value="{{catArea.1}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic" value="{{FechaP.1}}" readonly="readonly"></input>
 
    </div>
    <div class="col-md-12">
       <label for="finFechaPublic" class="form-label">Fecha de expiracion</label>
-      <input type="text" class="form-control" name="finFechaPublic" id="finFechaPublic" value="{{dat.4}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="finFechaPublic" id="finFechaPublic" value="{{FechaE.4}}" readonly="readonly"></input>
    </div>
    <div class="col-md-8">
       <label for="Publicada" class="form-label">Publicada</label>
-      <input type="text" class="form-control" name="Publicada" id="Publicada" value="{{dat.5}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="Publicada" id="Publicada" value="{{Pub.5}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
       <label for="observaciones" class="form-label">observaciones</label>
-      <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{dat.6}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{Obs.6}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
       <label for="candidactoSelecc" class="form-label">Seleccion de candidacto</label>
-      <input type="text" class="form-control" name="candidactoSelecc" id="candidactoSelecc" value="{{dat.7}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="candidactoSelecc" id="candidactoSelecc" value="{{SeleC.7}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
       <label for="fechaContratacion" class="form-label">Fecha de contratacion</label>
-      <input type="text" class="form-control" name="fechaContratacion" id="fechaContratacion" value="{{dat.8}}" readonly="readonly"></input>
+      <input type="text" class="form-control" name="fechaContratacion" id="fechaContratacion" value="{{FechaC.8}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
        <label for="idRequisicion" class="form-label">id Requisicion</label>
-       <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{dat.9}}" readonly="readonly"></input>
+       <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{idRe.9}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
        <label for="idPuesto" class="form-label">id puesto</label>
-       <input type="text" class="form-control" name="idPuesto" id="idPuesto" value="{{dat.10}}" readonly="readonly"></input>
+       <input type="text" class="form-control" name="idPuesto" id="idPuesto" value="{{idPu.10}}" readonly="readonly"></input>
    </div>
 </form>
+
 {% endblock %}
