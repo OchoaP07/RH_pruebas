@@ -714,7 +714,7 @@ def requisicion_fedita():
 def requisicion_agregar():
     return render_template('requisicion_agrOp2.html')
 
-@app.route('/requisicion_fagrega2', methods=['POST'])
+@app.route('/requisicion_fagrOp2', methods=['POST'])
 def requisicion_fagrega():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -740,7 +740,7 @@ def requisicion_fagrega():
 def requisicion_borrar(req):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM requisicion WHERE idrequisicion = %s', (req,))
+    cursor.execute('DELETE FROM requisicion WHERE idRequisicion = %s', (req,))
     return redirect(url_for('requisicion'))
 
 #vacante
@@ -750,14 +750,55 @@ def vacantes():
     cursor = conn.cursor()
     cursor.execute('SELECT idVacante, fuenteCandidato FROM vacante ORDER BY idVacante')
     datos = cursor.fetchall()
-    return render_template("vacantes.html", vac=datos, NomP="", FuenteC="", FechaP="", FechaE="",
-                           Pub="", Obs="", tipo="", SeleC="", FechaC="", idRe="",idPu="")
+    return render_template("vacantes.html", vac=datos, NomP=" ", FuenteC=" ", FechaP=" ", FechaE=" ",
+                           Pub=" ", Obs=" ", tipo=" ", SeleC=" ", FechaC=" ", idRe=" ",idPu=" ")
 
+<<<<<<< HEAD
 #examen psicometrico
 @app.route('/examen')
 def examen():
     return render_template('examen.html')
 
+=======
+@app.route('/vacantes_fdetalle/<string:idR>', methods=['GET'])
+def vacante_fdetalle(idV):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+
+    cursor.execute('select idVacante from vacante order by idVacante')
+    datos = cursor.fetchall()
+
+    cursor.execute('select fuenteCandidato from rewhere idVacante = %s', (idV))
+    dato1 = cursor.fetchall()
+
+    cursor.execute('select publicada from rewhere idVacante = %s', (idV))
+    dato2 = cursor.fetchall()
+
+    cursor.execute('select  observaciones from rewhere idVacante = %s', (idV))
+    dato3 = cursor.fetchall()
+
+    cursor.execute('select  candidatoSelecc from rewhere idVacante = %s', (idV))
+    dato4 = cursor.fetchall()
+
+    cursor.execute('select  fechaContratacion from rewhere idVacante = %s', (idV))
+    dato5 = cursor.fetchall()
+
+    cursor.execute('select idRequisicion from rewhere idRacante = %s', (idV))
+    dato6 = cursor.fetchall()
+
+    cursor.execute('select f idPuesto from rewhere idPacante = %s', (idV))
+    dato7 = cursor.fetchall()
+    
+    return render_template("puesto.html", pue = datos, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
+                           Pub=dato4, Obs=dato3, SeleC=dato6, FechaC=" ", idRe=dato6,idPu=dato7)
+
+@app.route('/vacante_borrar')
+def vacante_borrar(vac):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
+    return redirect(url_for('vacantes.html'))
+>>>>>>> 1cd013f43ba5d0f616ae91bfc87d205dd2dd803b
 
 
 if __name__ == "__main__":
