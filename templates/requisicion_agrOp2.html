@@ -1,57 +1,52 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3>
-    <b class="center"> Agregar Puesto </b>
-</h3>
-
-<br>
 <form class="row g-3"  action="/requisicion_fagrega2" method="post">
+   <h3>
+      <b class="mintit">Agregar Requisicion </b>
+   </h3>
    <div class="col-md-12">
-      <label for="nomPuesto" class="form-label">Folio</label>
-      <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{folio.3}}" readonly="readonly"></input>
+      <label class="minap">Folio</label>
+      <input type="text" class="form-control" name="folio" id="folio" value="{{folio.3}}" readonly="readonly"></input>
    </div>
    <br>
    <div class="col-md-6">
-      <label for="codPuesto" class="form-label">Fecha de Elaboración</label>
-      <input type="text" class="form-control" name="codPuesto" id="codPuesto" value="{{elab.1}}" readonly="readonly"></input>
+      <label class="minap">Fecha de Elaboracion</label>
+      <input type="text" class="form-control" name="elab" id="elab" value="{{elab.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-6">
-      <label for="idArea" class="form-label">Fecha Reclutamiento</label>
-      <input type="text" class="form-control" name="idArea" id="idArea" value="{{recluta.1}}" readonly="readonly"></input>
-
+      <label class="minap">Fecha Reclutamiento</label>
+      <input type="text" class="form-control" name="recluta" id="recluta" value="{{recluta.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-      <label for="puestoJefeSup" class="form-label">Inicio Vacante</label>
-      <input type="text" class="form-control" name="puestoJefeSup" id="puestoJefeSup" value="{{inicvac.4}}" readonly="readonly"></input>
+      <label class="minap">Inicio Vacante</label>
+      <input type="text" class="form-control" name="inicvac" id="inicvac" value="{{inicvac.4}}" readonly="readonly"></input>
    </div>
    <div class="col-md-8">
-      <label for="jornada" class="form-label">Motivo</label>
-      <input type="text" class="form-control" name="jornada" id="jornada" value="{{motivo.5}}" readonly="readonly"></input>
+      <label class="minap">Motivo</label>
+      <input type="text" class="form-control" name="motivo" id="motivo" value="{{motivo}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-      <label for="remunMensual" class="form-label">Motivo Especifique</label>
-      <input type="text" class="form-control" name="remunMensual" id="remunMensual" value="{{motes.6}}" readonly="readonly"></input>
+      <label class="minap">Motivo Especifique</label>
+      <input type="text" class="form-control" name="motes" id="motes" value="{{motes}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-      <label for="prestaciones" class="form-label">Tipo</label>
-      <input type="text" class="form-control" name="prestaciones" id="prestaciones" value="{{tipo.7}}" readonly="readonly"></input>
+      <label class="minap">Tipo</label>
+      <input type="text" class="form-control" name="tipo" id="tipo" value="{{tipo}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-      <label for="descripcionGeneral" class="form-label">Nombre solicita</label>
-      <input type="text" class="form-control" name="descripcionGeneral" id="descripcionGeneral" value="{{nomsoli.8}}" readonly="readonly"></input>
+      <label class="minap">Nombre Solicita</label>
+      <input type="text" class="form-control" name="nomsoli" id="nomsoli" value="{{nomsoli}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-       <label for="funciones" class="form-label">Nombre autoriza</label>
-       <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomauto.9}}" readonly="readonly"></input>
+       <label class="minap">Nombre Autoriza</label>
+       <input type="text" class="form-control" name="nomauto" id="nomauto" value="{{nomauto}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-    <label for="funciones" class="form-label">Nombre revisa</label>
-    <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomrevi.9}}" readonly="readonly"></input>
-</div>
-
+      <label class="minap">Nombre Revisa</label>
+      <input type="text" class="form-control" name="nomrevi" id="nomrevi" value="{{nomrevi}}" readonly="readonly"></input>
+   </div>
    <div class="col-12">
-          <button type="submit" class="btn btn-primary">Enviar</button>
-
+          <button type="submit" class="btn btn-outline-light">Enviar</button>
     </div>
 </form>
 {% endblock %}

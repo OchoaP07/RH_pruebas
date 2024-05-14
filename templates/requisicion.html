@@ -47,45 +47,45 @@
         <b class="mintit"> Detalle: </b>
     </h3>
     <div class="col-md-12">
-        <label for="nomPuesto"  class="minap">Folio</label>
-        <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{folio.3}}" readonly="readonly">
-    </div>
-    <br>
-    <div class="col-md-6">
-        <label for="codPuesto"  class="minap">Fecha de Elaboración</label>
-        <input type="text" class="form-control" name="codPuesto" id="codPuesto" value="{{elab.1}}" readonly="readonly">
-    </div>
-    <div class="col-md-6">
-        <label for="idArea"  class="minap">Fecha Reclutamiento</label>
-        <input type="text" class="form-control" name="idArea" id="idArea" value="{{recluta.1}}" readonly="readonly">
-    </div>
-    <div class="col-md-12">
-        <label for="puestoJefeSup"  class="minap">Inicio vacante</label>
-        <input type="text" class="form-control" name="puestoJefeSup" id="puestoJefeSup" value="{{inicvac.4}}" readonly="readonly">
-    </div>
-    <div class="col-md-8">
-        <label for="jornada"  class="minap">Motivo</label>
-        <input type="text" class="form-control" name="jornada" id="jornada" value="{{motivo.5}}" readonly="readonly">
-    </div>
-    <div class="col-md-4">
-        <label for="remunMensual"  class="minap">Motivo especifique</label>
-        <input type="text" class="form-control" name="remunMensual" id="remunMensual" value="{{motes.6}}" readonly="readonly">
-    </div>
-    <div class="col-md-12">
-        <label for="prestaciones"  class="minap">Tipo</label>
-        <input type="text" class="form-control" name="prestaciones" id="prestaciones" value="{{tipo.7}}" readonly="readonly">
-    </div>
-    <div class="col-md-12">
-        <label for="descripcionGeneral"  class="minap">Nombre solicita</label>
-        <input type="text" class="form-control" name="descripcionGeneral" id="descripcionGeneral" value="{{nomsoli.8}}" readonly="readonly">
-    </div>
-    <div class="col-md-12">
-        <label for="funciones"  class="minap">Nombre autoriza</label>
-        <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomauto.9}}" readonly="readonly">
-    </div>
-    <div class="col-md-12">
-        <label for="funciones"  class="minap">Nombre revisa</label>
-        <input type="text" class="form-control" name="funciones" id="funciones" value="{{nomrevi.9}}" readonly="readonly">
-    </div>
-</form>
+        <label class="minap">Folio</label>
+        <input type="text" class="form-control" name="folio" id="folio" value="{{folio.3}}" readonly="readonly"></input>
+     </div>
+     <br>
+     <div class="col-md-6">
+        <label class="minap">Fecha de Elaboracion</label>
+        <input type="text" class="form-control" name="elab" id="elab" value="{{elab.1}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-6">
+        <label class="minap">Fecha Reclutamiento</label>
+        <input type="text" class="form-control" name="recluta" id="recluta" value="{{recluta.1}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-12">
+        <label class="minap">Inicio Vacante</label>
+        <input type="text" class="form-control" name="inicvac" id="inicvac" value="{{inicvac.4}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-8">
+        <label class="minap">Motivo</label>
+        <input type="text" class="form-control" name="motivo" id="motivo" value="{{motivo}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-4">
+        <label class="minap">Motivo Especifique</label>
+        <input type="text" class="form-control" name="motes" id="motes" value="{{motes}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-12">
+        <label class="minap">Tipo</label>
+        <input type="text" class="form-control" name="tipo" id="tipo" value="{{tipo}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-12">
+        <label class="minap">Nombre Solicita</label>
+        <input type="text" class="form-control" name="nomsoli" id="nomsoli" value="{{nomsoli}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-12">
+         <label class="minap">Nombre Autoriza</label>
+         <input type="text" class="form-control" name="nomauto" id="nomauto" value="{{nomauto}}" readonly="readonly"></input>
+     </div>
+     <div class="col-md-12">
+      <label class="minap">Nombre Revisa</label>
+      <input type="text" class="form-control" name="nomrevi" id="nomrevi" value="{{nomrevi}}" readonly="readonly"></input>
+  </div>
+  </form>
 {% endblock %}
