@@ -736,11 +736,12 @@ def requisicion_fagrega():
         conn.commit()
         return redirect(url_for('requisicion_fagrega2'))
     
-@app.route('/requisicion_borrar')
+@app.route('/requisicion_borrar/<string:req>')
 def requisicion_borrar(req):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM requisicion WHERE idRequisicion = %s', (req,))
+    conn.commit()
     return redirect(url_for('requisicion'))
 
 #vacante
@@ -785,12 +786,14 @@ def vacante_fdetalle(idV):
     return render_template("puesto.html", pue = datos, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
                            Pub=dato4, Obs=dato3, SeleC=dato6, FechaC=" ", idRe=dato6,idPu=dato7)
 
-@app.route('/vacante_borrar')
+@app.route('/vacante_borrar/<string:vac>')
 def vacante_borrar(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
-    return redirect(url_for('vacantes.html'))
+    conn.commit()
+    return redirect(url_for('vacantes'))
+
 
 #examen psicometrico
 @app.route('/examen')
