@@ -498,6 +498,7 @@ CREATE TABLE IF NOT EXISTS `examen` (
 
 CREATE TABLE IF NOT EXISTS `calificaciones` (
   `idCalificacion` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
   `calificacion` int(11) NOT NULL,
   `preg1` varchar(250) NOT NULL,
   `preg2` varchar(250) NOT NULL,
@@ -512,7 +513,7 @@ CREATE TABLE IF NOT EXISTS `calificaciones` (
   `preg11` varchar(250) NOT NULL,
   `preg12` varchar(250) NOT NULL,
   PRIMARY KEY (`idCalificacion`)
-)
+);
 
 
 
