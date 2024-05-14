@@ -511,7 +511,7 @@ CREATE TABLE IF NOT EXISTS `calificaciones` (
   `preg10` varchar(250) NOT NULL,
   `preg11` varchar(250) NOT NULL,
   `preg12` varchar(250) NOT NULL,
-  PRIMARY KEY (`idExamen`)
+  PRIMARY KEY (`idCalificacion`)
 )
 
 
