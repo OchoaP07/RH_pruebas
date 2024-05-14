@@ -285,7 +285,7 @@ def habilidades_fagrega():
 def habilidades_editar(id):
     conn =pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor=conn.cursor()
-    cursor.execute('select idHabilidad, descripcion from habilidad where idHabilidad=%s', (id))
+    cursor.execute('select idHabilidad, descripcion from habilidad where idHabilidad=%s',(id))
     dato=cursor.fetchone()
     return render_template("habilidades_edi.html", comentar=dato)
 
@@ -753,13 +753,6 @@ def vacantes():
     return render_template("vacantes.html", vac=datos, NomP=" ", FuenteC=" ", FechaP=" ", FechaE=" ",
                            Pub=" ", Obs=" ", tipo=" ", SeleC=" ", FechaC=" ", idRe=" ",idPu=" ")
 
-<<<<<<< HEAD
-#examen psicometrico
-@app.route('/examen')
-def examen():
-    return render_template('examen.html')
-
-=======
 @app.route('/vacantes_fdetalle/<string:idR>', methods=['GET'])
 def vacante_fdetalle(idV):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -798,8 +791,57 @@ def vacante_borrar(vac):
     cursor = conn.cursor()
     cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
     return redirect(url_for('vacantes.html'))
->>>>>>> 1cd013f43ba5d0f616ae91bfc87d205dd2dd803b
 
+#examen psicometrico
+@app.route('/examen')
+def examen():
+    return render_template('examen.html')
+ 
+@app.route('/examen_enviar', methods=['POST'])
+def examen_enviar():
+    if request.method == 'POST':
+        nom=request.form['nombre']
+        p1=request.form['p1']
+        p2=request.form['p2']
+        p3=request.form['p3']
+        p4=request.form['p4']
+        p5=request.form['p5']
+        p6=request.form['p6']
+        p7=request.form['p7']
+        p8=request.form['p8']
+        p9=request.form['p9']
+        p10=request.form['p10']
+        p11=request.form['p11']
+        p12=request.form['p12']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO examen (nombre, preg1, preg2, preg3, preg4, preg5, preg6, preg7, preg8, preg9, preg10, preg11, preg12) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s)', (nom,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12))
+        conn.commit()
+    return redirect(url_for('crud_examen'))
+
+@app.route('/crud_examen')
+def crud_examen():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('SELECT idExamen, nombre FROM examen order by idExamen')
+    datos = cursor.fetchall()
+    return render_template('examen_crudr.html', comentarios=datos)
+
+@app.route('/examen_borrar/<string:id>')
+def examen_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM examen WHERE idExamen={0}'.format(id))
+    conn.commit()
+    return redirect(url_for('crud_examen'))
+
+@app.route('/examen_calificar/<string:id>')
+def examen_calificar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute("SELECT idExamen, nombre, preg1, preg2, preg3, preg4, preg5, preg6, preg7, preg8, preg9, preg10, preg11, preg12 FROM examen WHERE idExamen=%s", (id))
+    dato=cursor.fetchone()
+    return render_template('califica_examen.html', com=dato)
 
 if __name__ == "__main__":
     app.run(debug=True)

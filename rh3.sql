@@ -478,18 +478,24 @@ INSERT INTO `requisicion` (`idRequisicion`, `folio`, `fechaElab`, `fechaRecluta`
 (10, '2', '2023-11-23', '2023-11-27', '2023-12-01', 'Otro', 'temporada', 'Temporal', 'LUIS, JEFE DE VENTAS', 'luis', 'juan', 1, 1, 1);
 
 
---Tabla de examenes--
-CREATE TABLE IF NOT EXISTS 'examen'(
-  'idExamen' int(11) NOT NULL AUTO_INCREMENT, 
-  'nombre' varchar(70) NOT NULL,
-  'preg1' varchar(250) NOT NULL,
-  'preg2' varchar(250) NOT NULL,
-  'preg3' varchar(250) NOT NULL,
-  'preg4' varchar(250) NOT NULL,
-  'preg5' varchar(250) NOT NULL,
-  'preg6' varchar(250) NOT NULL,
-  'preg7' varchar(250) NOT NULL,
-)
+CREATE TABLE IF NOT EXISTS `examen` (
+  `idExamen` int(11) NOT NULL AUTO_INCREMENT, 
+  `nombre` varchar(70) NOT NULL,
+  `preg1` varchar(250) NOT NULL,
+  `preg2` varchar(250) NOT NULL,
+  `preg3` varchar(250) NOT NULL,
+  `preg4` varchar(250) NOT NULL,
+  `preg5` varchar(250) NOT NULL,
+  `preg6` varchar(250) NOT NULL,
+  `preg7` varchar(250) NOT NULL,
+  `preg8` varchar(250) NOT NULL,
+  `preg9` varchar(250) NOT NULL,
+  `preg10` varchar(250) NOT NULL,
+  `preg11` varchar(250) NOT NULL,
+  `preg12` varchar(250) NOT NULL,
+  PRIMARY KEY (`idExamen`)
+);
+
 
 
 -- --------------------------------------------------------
@@ -521,6 +527,3 @@ INSERT INTO `vacante` (`idVacante`, `conseVR`, `fuenteCandidato`, `inicioFechaPu
 (1, 0, 'Interno', '2023-11-23', '2023-11-27', 1, 'gfgf', 0, '0000-00-00', 1, 1);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
