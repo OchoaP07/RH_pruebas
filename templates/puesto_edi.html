@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-
-
 <form class="row g-3"  action="/puesto_fedita/{{dat.0}}" method="post">
-   <h3 class="center">
+   <h3>
       <b class="mintit">Editar Puesto: </b> 
   </h3>
    <div class="col-md-6">
@@ -21,7 +19,6 @@
                <option value="{{i.0}}">{{i.1}}</option>
             {% endfor %}
        </select>
-
    </div>
    <div class="col-md-12">
       <label for="nomPuesto" class="minap">Nombre del Puesto</label>
@@ -164,11 +161,7 @@
       </label>
    </div>
    {% endfor %}
-
   </div>
-
-
-
    <div class="col-12">
       <button type="submit" class="btn btn-outline-light">Actualizar</button>
     </div>
