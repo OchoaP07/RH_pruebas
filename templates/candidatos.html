@@ -1,37 +1,37 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-
-    <table  width="100%" border="1" cellpadding="0" bordercolor="#000000">
+<div class="tablass">
+    <table class="bordercolor">
     <tbody>
     <tr>
-    <td color="FFFFFF" bgcolor="#465F5A" valign="top">
-    <center><h3>CANDIDATOS REGISTRADOS</h3></center>
-    <table class="table table-dark table-hover" width="100%" border="1" cellpadding="0" bordercolor="#000000">
+    <td class="minap" valign="top">
+        <div class="mintit">
+            <h3>CANDIDATOS REGISTRADOS</h3>
+        </div>
+    <table class="table table-dark table-hover" class="bordercolor">
     <thead>
       <tr>
-        <td color="white" bgcolor="blue">Nombre del candidato</td>
-
-        <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"></td>
-        <td color="white" bgcolor="black"> <rigth><h2><a href="/candidato_agrOp2" class="btn btn-dark btn-sm">Agregar</a></h2></rigth>  </td>
+        <td>Nombre del candidato</td>
+        <td></td>
+        <td></td>
+        <td> <rigth><h2><a href="/candidato_agrOp2" class="btn btn-dark btn-sm">Agregar Candidatos</a></h2></rigth>  </td>
       </tr>
     </thead>
     <tbody>
     {% for i in can %}
         <tr>
-        <td width="80%">
+        <td width="60%">
            {{i.1}}
         </td>
 
-        <td bgcolor="#2B2D83" width="6%" class="center">
+        <td width="6%" class="center">
         <a href="/candidatos_fdetalle/{{i.0}}" class="btn btn-outline-info btn-sm ">Detalle</a>
         </td>
-        <td bgcolor="#2B2D83" width="6%" class="center">
+        <td width="6%" class="center">
         <a href="/candidatos_editar/{{i.0}}" class="btn btn-outline-info btn-sm ">Editar</a>
         </td>
-        <td bgcolor="#3C3EC5" width="6%" class="center">
+        <td width="6%" class="center">
         <a href="/candidatos_borrar/{{i.0}}" class="btn btn-outline-primary btn-sm">Borrar</a>
         </td>
         </tr>
@@ -42,173 +42,170 @@
     </tr>
     </tbody>
     </table>
-<br>
-<h3>
-    <b class="center"> Detalle: </b>
-
-</h3>
-<br>
-
+    </div>
 <form class="row g-3"  action="/candidato_fdetalle/" method="GET">
+    <h3>
+        <b class="mintit"> Detalle: </b>
+    </h3>
    <div class="col-md-12">
-      <label for="idCandidato" class="form-label">id candidato</label>
+      <label for="idCandidato" class="minap">Id candidato</label>
       <input type="text" class="form-control" name="idCandidato" id="idCandidato" value="{{idC.1}}" readonly="readonly"></input>
    </div>
    <br>
    <div class="col-md-6">
-      <label for="idVacante" class="form-label">id Vacante</label>
+      <label for="idVacante" class="minap">Id Vacante</label>
       <input type="text" class="form-control" name="idVacante" id="idVacante" value="{{idV.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-6">
-      <label for="idRequisicion" class="form-label">id Requisicion</label>
+      <label for="idRequisicion" class="minap">Id Requisicion</label>
       <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{idR.1}}" readonly="readonly"></input>
 
    </div>
    <div class="col-md-12">
-      <label for="idPuesto" class="form-label">Puesto del Jefe Superior</label>
+      <label for="idPuesto" class="minap">Puesto del Jefe Superior</label>
       <input type="text" class="form-control" name="idPuesto" id="idPuesto" value="{{Pjf.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-8">
-      <label for="CURP" class="form-label">CURP</label>
+      <label for="CURP" class="minap">CURP</label>
       <input type="text" class="form-control" name="CURP" id="CURP" value="{{curp.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-      <label for="RFC" class="form-label">RFC</label>
+      <label for="RFC" class="minap">RFC</label>
       <input type="text" class="form-control" name="RFC" id="RFC" value="{{rfc.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-      <label for="nombre" class="form-label">Nombre</label>
+      <label for="nombre" class="minap">Nombre</label>
       <input type="text" class="form-control" name="nombre" id="nombre" value="{{nom.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-      <label for="domCalle" class="form-label">Calle</label>
+      <label for="domCalle" class="minap">Calle</label>
       <input type="text" class="form-control" name="domCalle" id="domCalle" value="{{calle.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-       <label for="domNumExtInt" class="form-label">Numero Exterior Interior</label>
+       <label for="domNumExtInt" class="minap">Numero Exterior Interior</label>
        <input type="text" class="form-control" name="domNumExtInt" id="domNumExtInt" value="{{numEI.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-       <label for="domColonia" class="form-label">domColonia</label>
+       <label for="domColonia" class="minap">Domicilio y Colonia</label>
        <input type="text" class="form-control" name="domColonia" id="domColonia" value="{{domC.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-       <label for="tel1" class="form-label">telefono1</label>
+       <label for="tel1" class="minap">Teléfono1</label>
        <input type="text" class="form-control" name="tel1" id="tel1" value="{{tel.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-       <label for="tel2" class="form-label">telefono2</label>
+       <label for="tel2" class="minap">Teléfono2</label>
        <input type="text" class="form-control" name="tel2" id="tel2" value="{{tel2.1}}" readonly="readonly"></input>
 
    </div>
    <div class="col-md-4">
-       <label for="correoE" class="form-label">correo electronico</label>
+       <label for="correoE" class="minap">correo Electronico</label>
        <input type="text" class="form-control" name="correoE" id="correoE" value="{{correoE.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-4">
-       <label for="edad" class="form-label">Edad</label>
+       <label for="edad" class="minap">Edad</label>
         <input type="text" class="form-control" name="edad" id="edad" value="{{edad.1}}" readonly="readonly"></input>
        </select>
    </div>
    <div class="col-md-4">
-       <label for="sexo" class="form-label">Sexo</label>
+       <label for="sexo" class="minap">Sexo</label>
         <input type="text" class="form-control" name="sexo" id="sexo" value="{{sexo.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-       <label for="idEstadoCivil" class="form-label">Estado Civil</label>
+       <label for="idEstadoCivil" class="minap">Estado Civil</label>
        <input type="text" class="form-control" name="idEstadoCivil" id="idEstadoCivil" value="{{Ecivil.1}}" readonly="readonly"></input>
    </div>
    <div class="col-md-12">
-       <label for="idGradoAvance" class="form-label">Grado Avance</label>
+       <label for="idGradoAvance" class="minap">Grado Avance</label>
        <input type="text" class="form-control" name="idGradoAvance" id="idGradoAvance" value="{{GAva.1}}" readonly="readonly"></input>
 
     </div>
     <div class="col-md-12">
-        <label for="idCarrera" class="form-label">Carrera</label>
+        <label for="idCarrera" class="minap">Carrera</label>
         <input type="text" class="form-control" name="idCarrera" id="idCarrera" value="{{carrera.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="entrevSelecReq" class="form-label">entrevista Selececion Requerida</label>
+        <label for="entrevSelecReq" class="minap">Entrevista Selececion Requerida</label>
         <input type="text" class="form-control" name="entrevSelecReq" id="entrevSelecReq" value="{{esr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="entrevSelecPresen" class="form-label">entrevista Seleccion Presente</label>
+        <label for="entrevSelecPresen" class="minap">Entrevista Seleccion Presente</label>
         <input type="text" class="form-control" name="entrevSelecPresen" id="entrevSelecPresen" value="{{esP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="entrevSelecResult" class="form-label">entrevista Seleccion resultado</label>
+        <label for="entrevSelecResult" class="minap">Entrevista Seleccion Resultado</label>
         <input type="text" class="form-control" name="entrevSelecResult" id="entrevSelecResult" value="{{esR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalMedicaReq" class="form-label">evaluacion medica Requerida</label>
+        <label for="evalMedicaReq" class="minap">Evaluacion medica Requerida</label>
         <input type="text" class="form-control" name="evalMedicaReq" id="evalMedicaReq" value="{{emR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalMedicaPresen" class="form-label">evaluacion medica Presente</label>
+        <label for="evalMedicaPresen" class="minap">Evaluacion medica Presente</label>
         <input type="text" class="form-control" name="evalMedicaPresen" id="evalMedicaPresen" value="{{emP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalMedicaResult" class="form-label">evaluacion medica resultado</label>
+        <label for="evalMedicaResult" class="minap">Evaluacion medica resultado</label>
         <input type="text" class="form-control" name="evalMedicaResult" id="evalMedicaResult" value="{{emr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicolgReq" class="form-label">evaluacion Psicologico Requerida</label>
+        <label for="evalPsicolgReq" class="minap">Evaluacion Psicologico Requerida</label>
         <input type="text" class="form-control" name="evalPsicolgReq" id="evalPsicolgReq" value="{{epR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicolgPresen" class="form-label">evaluacion Psicolg Presente</label>
+        <label for="evalPsicolgPresen" class="minap">Evaluacion Psicolg Presente</label>
         <input type="text" class="form-control" name="evalPsicolgPresen" id="evalPsicolgPresen" value="{{epP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicolgResult" class="form-label">evaluacion Psicolg resultado</label>
+        <label for="evalPsicolgResult" class="minap">Evaluacion Psicolg resultado</label>
         <input type="text" class="form-control" name="evalPsicolgResult" id="evalPsicolgResult" value="{{epr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicometReq" class="form-label">evaluacion Psicomet Requerida</label>
+        <label for="evalPsicometReq" class="minap">Evaluacion Psicomet Requerida</label>
         <input type="text" class="form-control" name="evalPsicometReq" id="evalPsicometReq" value="{{epR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicometPresen" class="form-label">evaluacion Psicomet Presente</label>
+        <label for="evalPsicometPresen" class="minap">Evaluacion Psicomet Presente</label>
         <input type="text" class="form-control" name="evalPsicometPresen" id="evalPsicometPresen" value="{{epP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalPsicometResult" class="form-label">evaluacion Psicomet resultado</label>
+        <label for="evalPsicometResult" class="minap">Evaluacion Psicomet Resultado</label>
         <input type="text" class="form-control" name="evalPsicometResult" id="evalPsicometResult" value="{{epr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalTecnicaReq" class="form-label">evaluacion Tecnica Requerida</label>
+        <label for="evalTecnicaReq" class="minap">Evaluacion Tecnica Requerida</label>
         <input type="text" class="form-control" name="evalTecnicaReq" id="evalTecnicaReq" value="{{etR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalTecnicaPresen" class="form-label">evaluacion Tecnica Presente</label>
+        <label for="evalTecnicaPresen" class="minap">Evaluacion Tecnica Presente</label>
         <input type="text" class="form-control" name="evalTecnicaPresen" id="evalTecnicaPresen" value="{{etP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalTecnicaResult" class="form-label">evaluacion Tecnica resultado</label>
+        <label for="evalTecnicaResult" class="minap">Evaluacion Tecnica Resultado</label>
         <input type="text" class="form-control" name="evalTecnicaResult" id="evalTecnicaResult" value="{{etr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalConocReq" class="form-label">evaluacion Conocimientos Requerida</label>
+        <label for="evalConocReq" class="minap">Evaluacion Conocimientos Requerida</label>
         <input type="text" class="form-control" name="evalConocReq" id="evalConocReq" value="{{ecR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalConocPresen" class="form-label">evaluacion Conocimientos Presente</label>
+        <label for="evalConocPresen" class="minap">Evaluacion Conocimientos Presente</label>
         <input type="text" class="form-control" name="evalConocPresen" id="evalConocPresen" value="{{ecP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalConocResult" class="form-label">evaluacion Conocimientos resultado</label>
+        <label for="evalConocResult" class="minap">Evaluacion Conocimientos Resultado</label>
         <input type="text" class="form-control" name="evalConocResult" id="evalConocResult" value="{{ecr.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalFinalReq" class="form-label">evaluacion Final Requerida</label>
+        <label for="evalFinalReq" class="minap">Evaluacion Final Requerida</label>
         <input type="text" class="form-control" name="evalFinalReq" id="evalFinalReq" value="{{efR.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalFinalPresen" class="form-label">evaluacion Final Presente</label>
+        <label for="evalFinalPresen" class="minap">Rvaluacion Final Presente</label>
         <input type="text" class="form-control" name="evalFinalPresen" id="evalFinalPresen" value="{{efP.1}}" readonly="readonly"></input>
     </div>
     <div class="col-md-12">
-        <label for="evalFinalResult" class="form-label">evaluacion Final resultado</label>
+        <label for="evalFinalResult" class="minap">Evaluacion Final Resultado</label>
         <input type="text" class="form-control" name="evalFinalResult" id="evalFinalResult" value="{{efr.1}}" readonly="readonly"></input>
     </div>
 </form>
