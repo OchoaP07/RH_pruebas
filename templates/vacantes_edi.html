@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3>
-    <b class="center"> Puesto </b>
-
-</h3>
-
-   <br>
-   <form class="row g-3"  action="/vacantes_feditar/" method="GET">
+   <form class="row g-3"  action="/vacantes_feditar2/" method="post">
+      <h3>
+         <b class="mintit">Editar Vacante </b>
+     </h3>
       <div class="col-md-12">
          <label for="nomPuesto" class="form-label">Nombre del Puesto</label>
          <input type="text" class="form-control" name="nomPuesto" id="nomPuesto" value="{{dat.3}}" readonly="readonly"></input>
@@ -51,7 +48,7 @@
       </div>
 
    <div class="col-12">
-          <button type="submit" class="btn btn-primary">Enviar</button>
+          <button type="submit" class="btn btn-outline-light">Actualizar</button>
     </div>
 </form>
 {% endblock %}
