@@ -677,48 +677,48 @@ def requisicion():
 def requisicion_fdetalle(req):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('select idrequisicion from requisicion order by idrequisicion')
+    cursor.execute('select idRequisicion from requisicion order by idRequisicion= %s', (req,))
     datos = cursor.fetchall()
 
-    cursor.execute('select folio from requisicion order by idrequisicion')
+    cursor.execute('select folio from requisicion order by idRequisicion= %s', (req,))
     dato1 = cursor.fetchall()
 
-    cursor.execute('select fechaElab from requisicion order by idrequisicion')
+    cursor.execute('select fechaElab from requisicion order by idRequisicion= %s', (req,))
     dato2 = cursor.fetchall()
     
-    cursor.execute('select fechaRecluta from requisicion order by idrequisicion')
+    cursor.execute('select fechaRecluta from requisicion order by idRequisicion= %s', (req,))
     dato3 = cursor.fetchall()
     
-    cursor.execute('select fechaInicVac from requisicion order by idrequisicion')
+    cursor.execute('select fechaInicVac from requisicion order by idRequisicion= %s', (req,))
     dato4 = cursor.fetchall()
     
-    cursor.execute('select motivoRequisicion from requisicion order by idrequisicion')
+    cursor.execute('select motivoRequisicion from requisicion order by idRequisicion= %s', (req,))
     dato5 = cursor.fetchall()
     
-    cursor.execute('select motivoEspesifique from requisicion order by idrequisicion')
+    cursor.execute('select motivoEspecifique from requisicion order by idRequisicion= %s', (req,))
     dato6 = cursor.fetchall()
     
-    cursor.execute('select tipoVacante from requisicion order by idrequisicion')
+    cursor.execute('select tipoVacante from requisicion order by idRequisicion= %s', (req,))
     dato7 = cursor.fetchall()
     
-    cursor.execute('select nomSolicita from requisicion order by idrequisicion')
+    cursor.execute('select nomSolicita from requisicion order by idRequisicion= %s', (req,))
     dato8 = cursor.fetchall()
     
-    cursor.execute('select nomAutoriza from requisicion order by idrequisicion')
+    cursor.execute('select nomAutoriza from requisicion order by idRequisicion= %s', (req,))
     dato9 = cursor.fetchall()
     
-    cursor.execute('select nomRevisa from requisicion order by idrequisicion')
+    cursor.execute('select nomRevisa from requisicion order by idRequisicion= %s', (req,))
     dato10 = cursor.fetchall()
     
-    cursor.execute('select idPuesto from requisicion order by idrequisicion')
+    cursor.execute('select idPuesto from requisicion order by idRequisicion= %s', (req,))
     dato11 = cursor.fetchall()
     
-    cursor.execute('select idArea from requisicion order by idrequisicion')
+    cursor.execute('select idArea from requisicion order by idRequisicion= %s', (req,))
     dato12 = cursor.fetchall()
-    return render_template("requisicion.html",req = datos,folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
+    return render_template("requisicion.html", req = datos,folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
                            motivo=dato5, motivoE=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
-@app.route('/requisicion_fedita/<string:req>')
+@app.route('/requisicion_fedita')
 def requisicion_editar():
     return redirect(url_for('requisicion_edi.html'))
 
