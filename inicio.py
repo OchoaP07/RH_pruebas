@@ -673,49 +673,49 @@ def requisicion():
     return render_template("requisicion.html", req=datos, folio="", elab="", recluta="", inicvac="",
                            motivo="", motes="", tipo="", nomsoli="", nomauto="", nomrevi="")
 
-@app.route('/requisicion_fdetalle/<string:req>', methods=['GET'])
-def requisicion_fdetalle(req):
+@app.route('/requisicion_fdetalle/<string:id>', methods=['GET'])
+def requisicion_fdetalle(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion= %s', (req))
-    idR = cursor.fetchall()
+    cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion')
+    datos = cursor.fetchall()
 
-    cursor.execute('select folio from requisicion where idRequisicion= %s', (req))
-    dato1 = cursor.fetchall()
+    cursor.execute('select folio from requisicion where idRequisicion= %s', (id))
+    dato1 = cursor.fetchone()
 
-    cursor.execute('select fechaElab from requisicion where idRequisicion= %s', (req))
-    dato2 = cursor.fetchall()
+    cursor.execute('select fechaElab from requisicion where idRequisicion= %s', (id))
+    dato2 = cursor.fetchone()
     
-    cursor.execute('select fechaRecluta from requisicion where idRequisicion= %s', (req))
-    dato3 = cursor.fetchall()
+    cursor.execute('select fechaRecluta from requisicion where idRequisicion= %s', (id))
+    dato3 = cursor.fetchone()
     
-    cursor.execute('select fechaInicVac from requisicion where idRequisicion= %s', (req))
-    dato4 = cursor.fetchall()
+    cursor.execute('select fechaInicVac from requisicion where idRequisicion= %s', (id))
+    dato4 = cursor.fetchone()
     
-    cursor.execute('select motivoRequisicion from requisicion where idRequisicion= %s', (req))
-    dato5 = cursor.fetchall()
+    cursor.execute('select motivoRequisicion from requisicion where idRequisicion= %s', (id))
+    dato5 = cursor.fetchone()
     
-    cursor.execute('select motivoEspecifique from requisicion where idRequisicion= %s', (req))
-    dato6 = cursor.fetchall()
+    cursor.execute('select motivoEspecifique from requisicion where idRequisicion= %s', (id))
+    dato6 = cursor.fetchone()
     
-    cursor.execute('select tipoVacante from requisicion where idRequisicion= %s', (req))
-    dato7 = cursor.fetchall()
+    cursor.execute('select tipoVacante from requisicion where idRequisicion= %s', (id))
+    dato7 = cursor.fetchone()
     
-    cursor.execute('select nomSolicita from requisicion where idRequisicion= %s', (req))
-    dato8 = cursor.fetchall()
+    cursor.execute('select nomSolicita from requisicion where idRequisicion= %s', (id))
+    dato8 = cursor.fetchone()
     
-    cursor.execute('select nomAutoriza from requisicion where idRequisicion= %s', (req))
-    dato9 = cursor.fetchall()
+    cursor.execute('select nomAutoriza from requisicion where idRequisicion= %s', (id))
+    dato9 = cursor.fetchone()
     
-    cursor.execute('select nomRevisa from requisicion where idRequisicion= %s', (req))
-    dato10 = cursor.fetchall()
+    cursor.execute('select nomRevisa from requisicion where idRequisicion= %s', (id))
+    dato10 = cursor.fetchone()
     
-    cursor.execute('select idPuesto from requisicion where idRequisicion= %s', (req))
-    dato11 = cursor.fetchall()
+    cursor.execute('select idPuesto from requisicion where idRequisicion= %s', (id))
+    dato11 = cursor.fetchone()
     
-    cursor.execute('select idArea from requisicion where idRequisicion= %s', (req))
-    dato12 = cursor.fetchall()
-    return render_template("requisicion.html", req=idR, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
+    cursor.execute('select idArea from requisicion where idRequisicion= %s', (id))
+    dato12 = cursor.fetchone()
+    return render_template("requisicion.html", req=datos, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
 @app.route('/requisicion_fedita')
