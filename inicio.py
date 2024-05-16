@@ -677,46 +677,46 @@ def requisicion():
 def requisicion_fdetalle(req):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('select idRequisicion from requisicion order by idRequisicion= %s', (req,))
-    datos = cursor.fetchall()
+    cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion= %s', (req))
+    idR = cursor.fetchall()
 
-    cursor.execute('select folio from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select folio from requisicion where idRequisicion= %s', (req))
     dato1 = cursor.fetchall()
 
-    cursor.execute('select fechaElab from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select fechaElab from requisicion where idRequisicion= %s', (req))
     dato2 = cursor.fetchall()
     
-    cursor.execute('select fechaRecluta from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select fechaRecluta from requisicion where idRequisicion= %s', (req))
     dato3 = cursor.fetchall()
     
-    cursor.execute('select fechaInicVac from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select fechaInicVac from requisicion where idRequisicion= %s', (req))
     dato4 = cursor.fetchall()
     
-    cursor.execute('select motivoRequisicion from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select motivoRequisicion from requisicion where idRequisicion= %s', (req))
     dato5 = cursor.fetchall()
     
-    cursor.execute('select motivoEspecifique from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select motivoEspecifique from requisicion where idRequisicion= %s', (req))
     dato6 = cursor.fetchall()
     
-    cursor.execute('select tipoVacante from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select tipoVacante from requisicion where idRequisicion= %s', (req))
     dato7 = cursor.fetchall()
     
-    cursor.execute('select nomSolicita from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select nomSolicita from requisicion where idRequisicion= %s', (req))
     dato8 = cursor.fetchall()
     
-    cursor.execute('select nomAutoriza from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select nomAutoriza from requisicion where idRequisicion= %s', (req))
     dato9 = cursor.fetchall()
     
-    cursor.execute('select nomRevisa from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select nomRevisa from requisicion where idRequisicion= %s', (req))
     dato10 = cursor.fetchall()
     
-    cursor.execute('select idPuesto from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select idPuesto from requisicion where idRequisicion= %s', (req))
     dato11 = cursor.fetchall()
     
-    cursor.execute('select idArea from requisicion order by idRequisicion= %s', (req,))
+    cursor.execute('select idArea from requisicion where idRequisicion= %s', (req))
     dato12 = cursor.fetchall()
-    return render_template("requisicion.html", req = datos,folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
-                           motivo=dato5, motivoE=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
+    return render_template("requisicion.html", req=idR, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
+                           motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
 @app.route('/requisicion_fedita')
 def requisicion_editar():
@@ -790,43 +790,43 @@ def vacantes():
     return render_template("vacantes.html", vac=datos, NomP=" ", FuenteC=" ", FechaP=" ", FechaE=" ",
                            Pub=" ", Obs=" ", tipo=" ", SeleC=" ", FechaC=" ", idRe=" ",idPu=" ")
 
-@app.route('/vacantes_fdetalle/<string:idV>', methods=['GET'])
-def vacante_fdetalle(idV):
+@app.route('/vacantes_fdetalle/<string:vac>', methods=['GET'])
+def vacante_fdetalle(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
 
-    cursor.execute('select idVacante from vacante order by idVacante')
-    datos = cursor.fetchall()
+    cursor.execute('select idVacante, fuenteCandidato from vacante order by idVacante')
+    dato = cursor.fetchall()
 
-    cursor.execute('select fuenteCandidato from rewhere idVacante = %s', (idV))
+    cursor.execute('select fuenteCandidato from vacante where idVacante = %s', (vac))
     dato1 = cursor.fetchall()
 
-    cursor.execute('select inicioFechaPublic from rewhere idVacante = %s', (idV))
+    cursor.execute('select inicioFechaPublic from vacante where idVacante = %s', (vac))
     dato2 = cursor.fetchall()
 
-    cursor.execute('select finFechaPublic from rewhere idVacante = %s', (idV))
+    cursor.execute('select finFechaPublic from vacante where idVacante = %s', (vac))
     dato3 = cursor.fetchall()
 
-    cursor.execute('select publicada from rewhere idVacante = %s', (idV))
+    cursor.execute('select publicada from vacante where idVacante = %s', (vac))
     dato4 = cursor.fetchall()
 
-    cursor.execute('select  observaciones from rewhere idVacante = %s', (idV))
+    cursor.execute('select  observaciones from vacante where idVacante = %s', (vac))
     dato5 = cursor.fetchall()
 
-    cursor.execute('select  candidatoSelecc from rewhere idVacante = %s', (idV))
+    cursor.execute('select  candidatoSelecc from vacante where idVacante = %s', (vac))
     dato6 = cursor.fetchall()
 
-    cursor.execute('select  fechaContratacion from rewhere idVacante = %s', (idV))
+    cursor.execute('select  fechaContratacion from vacante where idVacante = %s', (vac))
     dato7 = cursor.fetchall()
 
-    cursor.execute('select idRequisicion from rewhere idVacante = %s', (idV))
+    cursor.execute('select idRequisicion from vacante where idVacante = %s', (vac))
     dato8 = cursor.fetchall()
 
-    cursor.execute('select f idPuesto from rewhere idVacante = %s', (idV))
+    cursor.execute('select  idPuesto from vacante where idVacante = %s', (vac))
     dato9 = cursor.fetchall()
     
-    return render_template("puesto.html", pue = datos, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
-                           Pub=dato4, Obs=dato3, SeleC=dato6, FechaC=dato7, idRe=dato8,idPu=dato9)
+    return render_template("vacantes.html", vac=dato, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
+                           Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idP=dato9)
 
 @app.route('/vacante_borrar/<string:vac>')
 def vacante_borrar(vac):
@@ -834,8 +834,8 @@ def vacante_borrar(vac):
     cursor = conn.cursor()
     cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
     conn.commit()
-    return redirect(url_for('vacantes'))
-
+    return redirect(url_for('vacantes.html'))
+#candidato
 @app.route('/candidatos')
 def candidatos():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
