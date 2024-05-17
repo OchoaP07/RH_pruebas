@@ -44,7 +44,7 @@ INSERT INTO `area` (`idArea`, `descripcion`) VALUES
 (3, 'PRODUCCION'),
 (4, 'FINANZAS Y CONTABILIDAD'),
 (5, 'MERCADOTECNIA'),
-(8, 'informática');
+(6, 'INFORMATICA');
 
 -- --------------------------------------------------------
 
@@ -211,7 +211,7 @@ INSERT INTO `escolaridad` (`idEscolaridad`, `descripcion`) VALUES
 (6, 'LICENCIATURA / INGENIERÍA / PROFESIONAL'),
 (7, 'MAESTRIA'),
 (8, 'DOCTORADO'),
-(9, 'kinder según andrei');
+(9, 'KINDER');
 
 -- --------------------------------------------------------
 
