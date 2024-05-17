@@ -763,15 +763,15 @@ def requisicion_fagrega():
         nomsoli = request.form['nomSolicita']
         nomauto = request.form['nomAutoriza']
         nomrevi = request.form['nomRevisa']
-
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO requisicion (folio, fechaElab, fechaRecluta, fechaInicVac, motivoRequisicion,'
-                       'motivoEspesifique, tipoVacante, nomSolicita, nomAutoriza, nomRevisa) '
-                       'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                       (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+        cursor.execute(
+            'INSERT INTO requisicion (folio, fechaElab, fechaRecluta, fechaInicVac, motivoRequisicion,'
+            'motivoEspecifique, tipoVacante, nomSolicita, nomAutoriza, nomRevisa) '
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+            (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion.html'))
+        return redirect(url_for('requisicion'))
     
 @app.route('/requisicion_borrar/<string:req>')
 def requisicion_borrar(req):
