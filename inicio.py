@@ -718,11 +718,11 @@ def requisicion_fdetalle(id):
     return render_template("requisicion.html", req=datos, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
-@app.route('/requisicion_fedita/')
+@app.route('/requisicion_fedita')
 def requisicion_editar():
     return redirect(url_for('requisicion_edi.html'))
 
-@app.route('/requisicion_edi/<string:req>', methods=['POST'])
+@app.route('/requisicion_edi', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -738,11 +738,11 @@ def requisicion_fedita():
 
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
-
-        cursor.execute('UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
-                       'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
-                       'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
-                       (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+        cursor.execute(
+            'UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
+            'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
+            'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
+            (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
         return redirect(url_for('requisicion'))
 
@@ -829,6 +829,32 @@ def vacante_fdetalle(id):
     return render_template("vacantes.html", vac=dato, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
                            Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idPu=dato9)
 
+@app.route('/vacante_agrega2')
+def vacante_agrOp2():
+    return render_template("vacantes_agrOp2.html")
+
+@app.route('/vacantes_fagrega2', methods=['POST'])
+def vacante_fagrega():
+    if request.method == 'POST':
+        FuenteC = request.form['fuenteCandidato']
+        FechaP = request.form['inicioFechaPublic']
+        FechaE = request.form['finFechaPublic']
+        Pub = request.form['publicada']
+        Obs = request.form['observaciones']
+        SeleC = request.form['candidatoSelecc']
+        FechaC = request.form['fechaContratacion']
+        idR = request.form['idRequisicion']
+        idPu = request.form['idPuesto']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO vacante (fuenteCandidato, inicioFechaPublic, finFechaPublic,'
+            'publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto)'
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+            (FuenteC, FechaP, FechaE, Pub, Obs, SeleC, FechaC, idR, idPu))
+        conn.commit()
+        return redirect(url_for('vacantes'))
+    
 @app.route('/vacante_borrar/<string:vac>')
 def vacante_borrar(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -941,6 +967,78 @@ def candidato_fdetalle(id):
                             esr=dato19, esP=dato20, esR=dato21, emR=dato22, emP=dato23, emr=dato24, epR=dato25,
                             epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
+
+@app.route('/candidato_agrega2')
+def candidato_agrOp2():
+    return render_template("candidatos_agrOp2.html")
+
+@app.route('/candidato_fagrega2', methods=['POST'])
+def candidato_fagrega():
+    if request.method == 'POST':
+        idC = request.form['idCandidato']
+        idV = request.form['idVacante']
+        idR = request.form['idRequisicion']
+        Pjf = request.form['idPuesto']
+        curp = request.form['CURP']
+        rfc = request.form['RFC']
+        nom= request.form['nombre']
+        calle = request.form['domCalle']
+        numEI = request.form['domNumExtInt']
+        domC = request.form['domColonia']
+        tel = request.form['tel1']
+        tel2= request.form['tel2']
+        correoE = request.form['correoE']
+        edad = request.form['edad']
+        sexo= request.form['sexo']
+        Ecivil = request.form['idEstadoCivil']
+        GAva = request.form['idGradoAvance']
+        carrera = request.form['idCarrera']
+        esr = request.form['entrevSelecReq']
+        esP = request.form['entrevSelecPresen']
+        esR = request.form['entrevSelecResult']
+        emR = request.form['evalMedicaReq']
+        emP = request.form['evalMedicaPresen']
+        emr = request.form['evalMedicaResult']
+        epR = request.form['evalPsicolgReq']
+        epP = request.form['evalPsicolgPresen']
+        epr = request.form['evalPsicolgResult']
+        epRe = request.form['evalPsicometReq']
+        epPr = request.form['evalPsicometPresen']
+        epre = request.form['evalPsicometResult']
+        etR = request.form['evalTecnicaReq']
+        etP = request.form['evalTecnicaPresen']
+        etr = request.form['evalTecnicaResult']
+        ecR = request.form['evalConocReq']
+        ecP = request.form['evalConocPresen']
+        ecr = request.form['evalConocResult']
+        efR = request.form['entrevFinalReq']
+        efP = request.form['entrevFinalPresen']
+        efr = request.form['entrevFinalResul']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO candidato (idCandidato, idVacante, idRequisicion, idPuesto, CURP,'
+            'RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad,'
+            'sexo, idEstadoCivil, idGradoAvance, idCarrera, entrevSelecReq, entrevSelecPresen,'
+            'entrevSelecResult,evalMedicaReq,evalMedicaPresen, evalMedicaResult,evalPsicolgReq,'
+            'evalPsicolgPresen, evalPsicometResult, evalTecnicaReq evalTecnicaPresen,evalTecnicaResult,'
+            'evalConocReq, evalConocPresen, evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul) '
+            'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'
+                    '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)',
+            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,
+            tel2,correoE,edad,sexo,Ecivil,GAva,carrera, esr,esP,esR,emR,
+            emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,
+            efR,efP,efr))
+        conn.commit()
+        return redirect(url_for('candidato'))
+    
+@app.route('/candidato_borrar/<string:can>')
+def candidato_borrar(can):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM candidato WHERE idCandidato = %s', (can))
+    conn.commit()
+    return redirect(url_for('candidatos'))    
 
 #examen psicometrico
 @app.route('/examen')
