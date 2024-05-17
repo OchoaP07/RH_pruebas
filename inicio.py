@@ -771,7 +771,7 @@ def requisicion_fagrega():
                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                        (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion.html'))
+        return redirect(url_for('requisicion'))
     
 @app.route('/requisicion_borrar/<string:req>')
 def requisicion_borrar(req):
