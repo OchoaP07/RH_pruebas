@@ -718,7 +718,7 @@ def requisicion_fdetalle(id):
     return render_template("requisicion.html", req=datos, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
-@app.route('/requisicion_fedita')
+@app.route('/requisicion_fedita/')
 def requisicion_editar():
     return redirect(url_for('requisicion_edi.html'))
 
@@ -744,13 +744,13 @@ def requisicion_fedita():
                        'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
                        (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion_edi.html'))
+        return redirect(url_for('requisicion'))
 
-@app.route('/requisicion_fagrega2')
-def requisicion_agregar():
-    return render_template('requisicion_agrOp2.html')
+@app.route('/requisicion_agrega2')
+def requisicion_agrOp2():
+    return render_template("requisicion_agrOp2.html")
 
-@app.route('/requisicion_fagrOp2', methods=['POST'])
+@app.route('/requisicion_fagrega2', methods=['POST'])
 def requisicion_fagrega():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -763,6 +763,7 @@ def requisicion_fagrega():
         nomsoli = request.form['nomSolicita']
         nomauto = request.form['nomAutoriza']
         nomrevi = request.form['nomRevisa']
+
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute('INSERT INTO requisicion (folio, fechaElab, fechaRecluta, fechaInicVac, motivoRequisicion,'
@@ -770,7 +771,7 @@ def requisicion_fagrega():
                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                        (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
-        return redirect(url_for('requisicion_fagrega2'))
+        return redirect(url_for('requisicion.html'))
     
 @app.route('/requisicion_borrar/<string:req>')
 def requisicion_borrar(req):
@@ -1049,3 +1050,4 @@ def regreso():
 
 if __name__ == "__main__":
     app.run(debug=True)
+

@@ -1,23 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<form class="row g-3"  action="/puesto_fagrega2" method="post">
+<form class="row g-3"  action="/candidato_fagrega2" method="post">
    <h3  class="mintit">
-         <b> Agregar Puesto </b>
+         <b> Agregar Candidato </b>
     </h3>
-    <div class="col-md-6">
-      <label for="codPuesto" class="minap">Código de Puesto</label>
-      <input type="text" class="form-control" name="codPuesto" id="codPuesto"></input>
-   </div>
-   <div class="col-md-6">
-      <label for="idArea" class="minap">Área de Adscripción</label>
-       <select  name="idArea" id="idArea" class = "form-select">
-           <option  selected="true" disabled="disabled">Elige...</option>
-            {%
-               for i in catArea
-            %}
-               <option value="{{i.0}}">{{i.1}}</option>
-            {% endfor %}
-       </select>
+
        <div class="col-md-12">
          <label for="idCandidato" class="minap">Id candidato</label>
          <input type="text" class="form-control" name="idCandidato" id="idCandidato" value="{{dat.3}}" readonly="readonly"></input>

@@ -5,21 +5,7 @@
         <h3>
             <b class="mintit"> candidatos </b> 
         </h3>
-    <div class="col-md-6">
-      <label for="codcandidatos" class="minap">Código de candidatos</label>
-      <input type="text" class="form-control" name="codcandidatos" id="codcandidatos" value="{{dat.1}}"></input>
-   </div>
-   <div class="col-md-6">
-       <label for="idArea" class="minap">Área de adscripción</label>
-       <select name="idArea" id="idArea" class = "form-select" >
-           <option selected="true" value="{{Area.0}}" >{{Area.1}}</option>
-            {%
-               for i in catArea
-            %}
-               <option value="{{i.0}}">{{i.1}}</option>
-            {% endfor %}
-       </select>
-   </div>
+   
    <div class="col-md-12">
     <label for="idCandidato" class="minap">id candidato</label>
     <input type="text" class="form-control" name="idCandidato" id="idCandidato" value="{{idC.1}}" readonly="readonly"></input>
