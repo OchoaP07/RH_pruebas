@@ -718,11 +718,53 @@ def requisicion_fdetalle(id):
     return render_template("requisicion.html", req=datos, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
-@app.route('/requisicion_fedita')
-def requisicion_editar():
-    return redirect(url_for('requisicion_edi.html'))
+@app.route('/requisicion_fedita/<string:id>')
+def requisicion_editar(id): 
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idRequisicion, motivoRequisicion from requisicion order by idRequisicion')
+    datos = cursor.fetchall()
 
-@app.route('/requisicion_edi', methods=['POST'])
+    cursor.execute('select folio from requisicion where idRequisicion= %s', (id))
+    dato1 = cursor.fetchone()
+
+    cursor.execute('select fechaElab from requisicion where idRequisicion= %s', (id))
+    dato2 = cursor.fetchone()
+    
+    cursor.execute('select fechaRecluta from requisicion where idRequisicion= %s', (id))
+    dato3 = cursor.fetchone()
+    
+    cursor.execute('select fechaInicVac from requisicion where idRequisicion= %s', (id))
+    dato4 = cursor.fetchone()
+    
+    cursor.execute('select motivoRequisicion from requisicion where idRequisicion= %s', (id))
+    dato5 = cursor.fetchone()
+    
+    cursor.execute('select motivoEspecifique from requisicion where idRequisicion= %s', (id))
+    dato6 = cursor.fetchone()
+    
+    cursor.execute('select tipoVacante from requisicion where idRequisicion= %s', (id))
+    dato7 = cursor.fetchone()
+    
+    cursor.execute('select nomSolicita from requisicion where idRequisicion= %s', (id))
+    dato8 = cursor.fetchone()
+    
+    cursor.execute('select nomAutoriza from requisicion where idRequisicion= %s', (id))
+    dato9 = cursor.fetchone()
+    
+    cursor.execute('select nomRevisa from requisicion where idRequisicion= %s', (id))
+    dato10 = cursor.fetchone()
+    
+    cursor.execute('select idPuesto from requisicion where idRequisicion= %s', (id))
+    dato11 = cursor.fetchone()
+    
+    cursor.execute('select idArea from requisicion where idRequisicion= %s', (id))
+    dato12 = cursor.fetchone()
+    return render_template("requisicion_edi.html", req=datos, folio=dato1, elab=dato2, recluta=dato3, inicvac=dato4,
+                           motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
+
+
+@app.route('/requisicion_fedita2<string:idP>', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -881,7 +923,7 @@ def candidatos():
 def candidato_fdetalle(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('select idCandidato, CURP from candidato order by idVacante')
+    cursor.execute('select idCandidato, nombre from candidato order by idVacante')
     dato = cursor.fetchall()
     cursor.execute('select idCandidato from candidato where idCandidato = %s', (id))
     dato1 = cursor.fetchone()
@@ -1025,10 +1067,8 @@ def candidato_fagrega():
             'evalConocReq, evalConocPresen, evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul) '
             'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'
                     '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)',
-            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,
-            tel2,correoE,edad,sexo,Ecivil,GAva,carrera, esr,esP,esR,emR,
-            emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,
-            efR,efP,efr))
+            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
+            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
         conn.commit()
         return redirect(url_for('candidato'))
     
