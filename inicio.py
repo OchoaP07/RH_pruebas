@@ -897,6 +897,64 @@ def vacante_fagrega():
         conn.commit()
         return redirect(url_for('vacantes'))
     
+@app.route('/vacante_fedita/<string:id>')
+def vacante_editar(id): 
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idVacante, fuenteCandidato from vacante order by idVacante')
+    dato = cursor.fetchall()
+
+    cursor.execute('select fuenteCandidato from vacante where idVacante = %s', (id))
+    dato1 = cursor.fetchone()
+
+    cursor.execute('select inicioFechaPublic from vacante where idVacante = %s', (id))
+    dato2 = cursor.fetchone()
+
+    cursor.execute('select finFechaPublic from vacante where idVacante = %s', (id))
+    dato3 = cursor.fetchone()
+
+    cursor.execute('select publicada from vacante where idVacante = %s', (id))
+    dato4 = cursor.fetchone()
+
+    cursor.execute('select  observaciones from vacante where idVacante = %s', (id))
+    dato5 = cursor.fetchone()
+
+    cursor.execute('select  candidatoSelecc from vacante where idVacante = %s', (id))
+    dato6 = cursor.fetchone()
+
+    cursor.execute('select  fechaContratacion from vacante where idVacante = %s', (id))
+    dato7 = cursor.fetchone()
+
+    cursor.execute('select idRequisicion from vacante where idVacante = %s', (id))
+    dato8 = cursor.fetchone()
+
+    cursor.execute('select  idPuesto from vacante where idVacante = %s', (id))
+    dato9 = cursor.fetchone()
+    
+    return render_template("vacantes_edi.html", vac=dato, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
+                           Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idPu=dato9)
+
+@app.route('/vacante_fedita2/<string:idP>', methods=['POST'])
+def vacante_fedita():
+     if request.method == 'POST':
+        FuenteC = request.form['fuenteCandidato']
+        FechaP = request.form['inicioFechaPublic']
+        FechaE = request.form['finFechaPublic']
+        Pub = request.form['publicada']
+        Obs = request.form['observaciones']
+        SeleC = request.form['candidatoSelecc']
+        FechaC = request.form['fechaContratacion']
+        idR = request.form['idRequisicion']
+        idPu = request.form['idPuesto']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute(
+            'UPDATE vacante SET (fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s,'
+            'publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s)',
+            (FuenteC, FechaP, FechaE, Pub, Obs, SeleC, FechaC, idR, idPu))
+        conn.commit()
+        return redirect(url_for('vacantes'))
+          
 @app.route('/vacante_borrar/<string:vac>')
 def vacante_borrar(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -1072,6 +1130,153 @@ def candidato_fagrega():
         conn.commit()
         return redirect(url_for('candidato'))
     
+@app.route('/candidato_fedita/<string:id>')
+def candidato_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idCandidato, nombre from candidato order by idVacante')
+    dato = cursor.fetchall()
+    cursor.execute('select idCandidato from candidato where idCandidato = %s', (id))
+    dato1 = cursor.fetchone()
+    cursor.execute('select idVacante from candidato where idCandidato = %s', (id))
+    dato2 = cursor.fetchone()
+    cursor.execute('select idRequisicion from candidato where idCandidato = %s', (id))
+    dato3 = cursor.fetchone()
+    cursor.execute('select idPuesto from candidato where idCandidato = %s', (id))
+    dato4 = cursor.fetchone()
+    cursor.execute('select CURP from candidato where idCandidato = %s', (id))
+    dato5 = cursor.fetchone()
+    cursor.execute('select RFC from candidato where idCandidato = %s', (id))
+    dato6 = cursor.fetchone()
+    cursor.execute('select nombre from candidato where idCandidato = %s', (id))
+    dato7 = cursor.fetchone()
+    cursor.execute('select domCalle from candidato where idCandidato = %s', (id))
+    dato8 = cursor.fetchone()
+    cursor.execute('select domNumExtInt from candidato where idCandidato = %s', (id))
+    dato9 = cursor.fetchone()
+    cursor.execute('select domColonia from candidato where idCandidato = %s', (id))
+    dato10 = cursor.fetchone()
+    cursor.execute('select tel1 from candidato where idCandidato = %s', (id))
+    dato11 = cursor.fetchone()
+    cursor.execute('select tel2 from candidato where idCandidato = %s', (id))
+    dato12 = cursor.fetchone()
+    cursor.execute('select correoE from candidato where idCandidato = %s', (id))
+    dato13 = cursor.fetchone()
+    cursor.execute('select edad from candidato where idCandidato = %s', (id))
+    dato14 = cursor.fetchone()
+    cursor.execute('select sexo from candidato where idCandidato = %s', (id))
+    dato15 = cursor.fetchone()
+    cursor.execute('select idEstadoCivil from candidato where idCandidato = %s', (id))
+    dato16 = cursor.fetchone()
+    cursor.execute('select idGradoAvance from candidato where idCandidato = %s', (id))
+    dato17 = cursor.fetchone()
+    cursor.execute('select idCarrera from candidato where idCandidato = %s', (id))
+    dato18 = cursor.fetchone()
+    cursor.execute('select entrevSelecReq from candidato where idCandidato = %s', (id))
+    dato19 = cursor.fetchone()
+    cursor.execute('select entrevSelecPresen from candidato where idCandidato = %s', (id))
+    dato20 = cursor.fetchone()
+    cursor.execute('select entrevSelecResult from candidato where idCandidato = %s', (id))
+    dato21 = cursor.fetchone()
+    cursor.execute('select evalPsicolgReq from candidato where idCandidato = %s', (id))
+    dato22 = cursor.fetchone()
+    cursor.execute('select evalPsicologPresen from candidato where idCandidato = %s', (id))
+    dato23 = cursor.fetchone()
+    cursor.execute('select evalPsicologResult from candidato where idCandidato = %s', (id))
+    dato24 = cursor.fetchone()
+    cursor.execute('select evalMedicaReq from candidato where idCandidato = %s', (id))
+    dato25 = cursor.fetchone()
+    cursor.execute('select evalMedicaPresen from candidato where idCandidato = %s', (id))
+    dato26 = cursor.fetchone()
+    cursor.execute('select evalMedicaResult from candidato where idCandidato = %s', (id))
+    dato27 = cursor.fetchone()
+    cursor.execute('select evalPsicometReq from candidato where idCandidato = %s', (id))
+    dato28 = cursor.fetchone()
+    cursor.execute('select evalPsicometPresene from candidato where idCandidato = %s', (id))
+    dato29 = cursor.fetchone()
+    cursor.execute('select evalPsicometResult from candidato where idCandidato = %s', (id))
+    dato30 = cursor.fetchone()
+    cursor.execute('select evalTecnicaReq from candidato where idCandidato = %s', (id))
+    dato31 = cursor.fetchone()
+    cursor.execute('select evalTecnicaPresen from candidato where idCandidato = %s', (id))
+    dato32 = cursor.fetchone()
+    cursor.execute('select evalTecnicaResult from candidato where idCandidato = %s', (id))
+    dato33 = cursor.fetchone()
+    cursor.execute('select evalConocReq from candidato where idCandidato = %s', (id))
+    dato34 = cursor.fetchone()
+    cursor.execute('select evalConocPresen from candidato where idCandidato = %s', (id))
+    dato35 = cursor.fetchone()
+    cursor.execute('select evalConocResult from candidato where idCandidato = %s', (id))
+    dato36 = cursor.fetchone()
+    cursor.execute('select entrevFinalReq from candidato where idCandidato = %s', (id))
+    dato37 = cursor.fetchone()
+    cursor.execute('select entrevFinalPresen from candidato where idCandidato = %s', (id))
+    dato38 = cursor.fetchone()
+    cursor.execute('select entrevFinalResul from candidato where idCandidato = %s', (id))
+    dato39 = cursor.fetchone()
+    return render_template("candidatos_edi.html", can=dato, idC=dato1, idV=dato2, idR=dato3, Pjf=dato4, curp=dato5,
+                            rfc=dato6, nom=dato7, calle=dato8, numEI=dato9, domC=dato10, tel=dato11, tel2=dato12, 
+                            correoE=dato13, edad=dato14, sexo=dato15, Ecivil=dato16, GAva=dato17, carrera=dato18,
+                            esr=dato19, esP=dato20, esR=dato21, emR=dato22, emP=dato23, emr=dato24, epR=dato25,
+                            epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
+                            etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
+
+@app.route('/vacante_fedita2/<string:idP>', methods=['POST'])
+def vacante_fedita():
+    if request.method == 'POST':
+        idC = request.form['idCandidato']
+        idV = request.form['idVacante']
+        idR = request.form['idRequisicion']
+        Pjf = request.form['idPuesto']
+        curp = request.form['CURP']
+        rfc = request.form['RFC']
+        nom= request.form['nombre']
+        calle = request.form['domCalle']
+        numEI = request.form['domNumExtInt']
+        domC = request.form['domColonia']
+        tel = request.form['tel1']
+        tel2= request.form['tel2']
+        correoE = request.form['correoE']
+        edad = request.form['edad']
+        sexo= request.form['sexo']
+        Ecivil = request.form['idEstadoCivil']
+        GAva = request.form['idGradoAvance']
+        carrera = request.form['idCarrera']
+        esr = request.form['entrevSelecReq']
+        esP = request.form['entrevSelecPresen']
+        esR = request.form['entrevSelecResult']
+        emR = request.form['evalMedicaReq']
+        emP = request.form['evalMedicaPresen']
+        emr = request.form['evalMedicaResult']
+        epR = request.form['evalPsicolgReq']
+        epP = request.form['evalPsicolgPresen']
+        epr = request.form['evalPsicolgResult']
+        epRe = request.form['evalPsicometReq']
+        epPr = request.form['evalPsicometPresen']
+        epre = request.form['evalPsicometResult']
+        etR = request.form['evalTecnicaReq']
+        etP = request.form['evalTecnicaPresen']
+        etr = request.form['evalTecnicaResult']
+        ecR = request.form['evalConocReq']
+        ecP = request.form['evalConocPresen']
+        ecr = request.form['evalConocResult']
+        efR = request.form['entrevFinalReq']
+        efP = request.form['entrevFinalPresen']
+        efr = request.form['entrevFinalResul']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute(
+            'UPDATE candidato SET  (idCandidato=%s, idVacante=%s, idRequisicion=%s, idPuesto=%s, CURP=%s,'
+            'RFC=%s, nombre=%s, domCalle=%s, domNumExtInt=%s, domColonia=%s, tel1=%s, tel2=%s, correoE=%s, edad=%s,'
+            'sexo=%s, idEstadoCivil=%s, idGradoAvance=%s, idCarrera=%s, entrevSelecReq=%s, entrevSelecPresen=%s,'
+            'entrevSelecResult=%s,evalMedicaReq=%s,evalMedicaPresen=%s, evalMedicaResult=%s,evalPsicolgReq=%s,'
+            'evalPsicolgPresen=%s, evalPsicometResult=%s, evalTecnicaReq=%s, evalTecnicaPresen=%s,evalTecnicaResult=%s,'
+            'evalConocReq=%s, evalConocPresen=%s, evalConocResult=%s,entrevFinalReq=%s,entrevFinalPresen=%s,entrevFinalResul=%s)',
+            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
+            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
+        conn.commit()
+        return redirect(url_for('candidato'))
+
 @app.route('/candidato_borrar/<string:can>')
 def candidato_borrar(can):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
