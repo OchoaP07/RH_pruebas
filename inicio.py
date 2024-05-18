@@ -883,10 +883,10 @@ def vacante_fagrega():
         FechaE = request.form['finFechaPublic']
         Pub = request.form['publicada']
         Obs = request.form['observaciones']
-        SeleC = request.form['candidatoSelecc']
+        SeleC = request.form['candidactoSelecc']
         FechaC = request.form['fechaContratacion']
         idR = request.form['idRequisicion']
-        idPu = request.form['idPuesto']
+        idPu = request.form['idpuesto']
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
