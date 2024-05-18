@@ -764,7 +764,7 @@ def requisicion_editar(id):
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
 
-@app.route('/requisicion_fedita2<string:idP>', methods=['POST'])
+@app.route('/requisicion_fedita2/<string:idP>', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -809,7 +809,7 @@ def requisicion_fagrega():
         cursor = conn.cursor()
         cursor.execute(
             'INSERT INTO requisicion (folio, fechaElab, fechaRecluta, fechaInicVac, motivoRequisicion,'
-            'motivoEspecifique, tipoVacante, nomSolicita, nomAutoriza, nomRevisa) '
+            'motivoEspecifique, tipoVacante, nomSolicita, nomAutoriza, nomRevisa)'
             'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
             (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
