@@ -764,7 +764,7 @@ def requisicion_editar(id):
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
 
-@app.route('/requisicion_fedita2/<string:idP>', methods=['POST'])
+@app.route('/requisicion_fedita2/<string:id>', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -781,10 +781,10 @@ def requisicion_fedita():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-            'UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
+            'UPDATE requisicion SET folio = %s, fechaElab = %s, fechaRecluta = %s, fechaInicVac=%s,'
             'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
-            'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
-            (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+            'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',(folio, elab, recluta, inicvac,
+            motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
         return redirect(url_for('requisicion'))
 
@@ -897,7 +897,7 @@ def vacante_fagrega():
         conn.commit()
         return redirect(url_for('vacantes'))
     
-@app.route('/vacante_fedita/<string:id>')
+@app.route('/vacantes_fedita/<string:id>')
 def vacante_editar(id): 
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
@@ -934,7 +934,7 @@ def vacante_editar(id):
     return render_template("vacantes_edi.html", vac=dato, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
                            Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idPu=dato9)
 
-@app.route('/vacante_fedita2/<string:idP>', methods=['POST'])
+@app.route('/vacantes_fedita2/<string:id>', methods=['POST'])
 def vacante_fedita():
      if request.method == 'POST':
         FuenteC = request.form['fuenteCandidato']
