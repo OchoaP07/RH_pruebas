@@ -955,7 +955,7 @@ def vacante_fedita():
         conn.commit()
         return redirect(url_for('vacantes'))
           
-@app.route('/vacante_borrar/<string:vac>')
+@app.route('/vacantes_borrar/<string:vac>')
 def vacante_borrar(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
@@ -1221,7 +1221,7 @@ def candidato_editar(id):
                             epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
-@app.route('/candidatos_fedita2/<string:idP>', methods=['POST'])
+@app.route('/candidatos_fedita2/<string:id>', methods=['POST'])
 def candidato_fedita():
     if request.method == 'POST':
         idC = request.form['idCandidato']
