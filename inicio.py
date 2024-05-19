@@ -961,7 +961,7 @@ def vacante_borrar(vac):
     cursor = conn.cursor()
     cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
     conn.commit()
-    return redirect(url_for('vacantes.html'))
+    return redirect(url_for('vacantes'))
 
 #candidato
 @app.route('/candidatos')
@@ -1064,8 +1064,8 @@ def candidato_fdetalle(id):
     return render_template("candidatos.html", can=dato, idC=dato1, idV=dato2, idR=dato3, Pjf=dato4, curp=dato5,
                             rfc=dato6, nom=dato7, calle=dato8, numEI=dato9, domC=dato10, tel=dato11, tel2=dato12, 
                             correoE=dato13, edad=dato14, sexo=dato15, Ecivil=dato16, GAva=dato17, carrera=dato18,
-                            esr=dato19, esP=dato20, esR=dato21, emR=dato22, emP=dato23, emr=dato24, epR=dato25,
-                            epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
+                            esr=dato19, esP=dato20, esR=dato21, epR=dato22, epP=dato23, epr=dato24, emR=dato25,
+                            emP=dato26,emr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
 @app.route('/candidato_agrega2')
@@ -1100,10 +1100,10 @@ def candidato_fagrega():
         emP = request.form['evalMedicaPresen']
         emr = request.form['evalMedicaResult']
         epR = request.form['evalPsicolgReq']
-        epP = request.form['evalPsicolgPresen']
-        epr = request.form['evalPsicolgResult']
+        epP = request.form['evalPsicologPresen']
+        epr = request.form['evalPsicologResult']
         epRe = request.form['evalPsicometReq']
-        epPr = request.form['evalPsicometPresen']
+        epPr = request.form['evalPsicometPresene']
         epre = request.form['evalPsicometResult']
         etR = request.form['evalTecnicaReq']
         etP = request.form['evalTecnicaPresen']
@@ -1121,14 +1121,14 @@ def candidato_fagrega():
             'RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad,'
             'sexo, idEstadoCivil, idGradoAvance, idCarrera, entrevSelecReq, entrevSelecPresen,'
             'entrevSelecResult,evalMedicaReq,evalMedicaPresen, evalMedicaResult,evalPsicolgReq,'
-            'evalPsicolgPresen, evalPsicometResult, evalTecnicaReq evalTecnicaPresen,evalTecnicaResult,'
-            'evalConocReq, evalConocPresen, evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul) '
-            'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'
-                    '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)',
+            'evalPsicologPresen,evalPsicologResult,evalPsicometReq,evalPsicometPresene, evalPsicometResult,'
+            'evalTecnicaReq, evalTecnicaPresen,evalTecnicaResult,evalConocReq, evalConocPresen,'
+            'evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul)'
+            'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
             (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
-            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
+            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr,ecR,ecP,ecr,efR,efP,efr))
         conn.commit()
-        return redirect(url_for('candidato'))
+        return redirect(url_for('candidatos'))
     
 @app.route('/candidatos_fedita/<string:id>')
 def candidato_editar(id):
@@ -1277,7 +1277,7 @@ def candidato_fedita():
         conn.commit()
         return redirect(url_for('candidato'))
 
-@app.route('/candidato_borrar/<string:can>')
+@app.route('/candidatos_borrar/<string:can>')
 def candidato_borrar(can):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
