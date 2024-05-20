@@ -764,7 +764,7 @@ def requisicion_editar(id):
                            motivo=dato5, motes=dato6, tipo=dato7, nomsoli=dato8, nomauto=dato9, nomrevi=dato10)
 
 
-@app.route('/requisicion_fedita2/<string:idP>', methods=['POST'])
+@app.route('/requisicion_fedita2/<string:id>', methods=['POST'])
 def requisicion_fedita():
     if request.method == 'POST':
         folio = request.form['folio']
@@ -781,10 +781,10 @@ def requisicion_fedita():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-            'UPDATE requisicion SET folio=%s, fechaElab=%s, fechaRecluta=%s, fechaInicVac=%s,'
+            'UPDATE requisicion SET folio = %s, fechaElab = %s, fechaRecluta = %s, fechaInicVac=%s,'
             'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
-            'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',
-            (folio, elab, recluta, inicvac, motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+            'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',(folio, elab, recluta, inicvac,
+            motivo, motes, tipo, nomsoli, nomauto, nomrevi))
         conn.commit()
         return redirect(url_for('requisicion'))
 
@@ -897,7 +897,7 @@ def vacante_fagrega():
         conn.commit()
         return redirect(url_for('vacantes'))
     
-@app.route('/vacante_fedita/<string:id>')
+@app.route('/vacantes_fedita/<string:id>')
 def vacante_editar(id): 
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
@@ -934,7 +934,7 @@ def vacante_editar(id):
     return render_template("vacantes_edi.html", vac=dato, FuenteC=dato1, FechaP=dato2, FechaE=dato3,
                            Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idPu=dato9)
 
-@app.route('/vacante_fedita2/<string:idP>', methods=['POST'])
+@app.route('/vacantes_fedita2/<string:id>', methods=['POST'])
 def vacante_fedita():
      if request.method == 'POST':
         FuenteC = request.form['fuenteCandidato']
@@ -955,13 +955,13 @@ def vacante_fedita():
         conn.commit()
         return redirect(url_for('vacantes'))
           
-@app.route('/vacante_borrar/<string:vac>')
+@app.route('/vacantes_borrar/<string:vac>')
 def vacante_borrar(vac):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM vacante WHERE idVacante = %s', (vac))
     conn.commit()
-    return redirect(url_for('vacantes.html'))
+    return redirect(url_for('vacantes'))
 
 #candidato
 @app.route('/candidatos')
@@ -1064,8 +1064,8 @@ def candidato_fdetalle(id):
     return render_template("candidatos.html", can=dato, idC=dato1, idV=dato2, idR=dato3, Pjf=dato4, curp=dato5,
                             rfc=dato6, nom=dato7, calle=dato8, numEI=dato9, domC=dato10, tel=dato11, tel2=dato12, 
                             correoE=dato13, edad=dato14, sexo=dato15, Ecivil=dato16, GAva=dato17, carrera=dato18,
-                            esr=dato19, esP=dato20, esR=dato21, emR=dato22, emP=dato23, emr=dato24, epR=dato25,
-                            epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
+                            esr=dato19, esP=dato20, esR=dato21, epR=dato22, epP=dato23, epr=dato24, emR=dato25,
+                            emP=dato26,emr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
 @app.route('/candidato_agrega2')
@@ -1100,10 +1100,10 @@ def candidato_fagrega():
         emP = request.form['evalMedicaPresen']
         emr = request.form['evalMedicaResult']
         epR = request.form['evalPsicolgReq']
-        epP = request.form['evalPsicolgPresen']
-        epr = request.form['evalPsicolgResult']
+        epP = request.form['evalPsicologPresen']
+        epr = request.form['evalPsicologResult']
         epRe = request.form['evalPsicometReq']
-        epPr = request.form['evalPsicometPresen']
+        epPr = request.form['evalPsicometPresene']
         epre = request.form['evalPsicometResult']
         etR = request.form['evalTecnicaReq']
         etP = request.form['evalTecnicaPresen']
@@ -1121,14 +1121,23 @@ def candidato_fagrega():
             'RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad,'
             'sexo, idEstadoCivil, idGradoAvance, idEscolaridad, idCarrera, entrevSelecReq, entrevSelecPresen,'
             'entrevSelecResult,evalMedicaReq,evalMedicaPresen, evalMedicaResult,evalPsicolgReq,'
+<<<<<<< HEAD
             'evalPsicolgPresen, evalPsicometResult, evalTecnicaReq evalTecnicaPresen,evalTecnicaResult,'
             'evalConocReq, evalConocPresen, evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul) '
             'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'
                     '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)',
             (idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,es,carrera,
             esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
+=======
+            'evalPsicologPresen,evalPsicologResult,evalPsicometReq,evalPsicometPresene, evalPsicometResult,'
+            'evalTecnicaReq, evalTecnicaPresen,evalTecnicaResult,evalConocReq, evalConocPresen,'
+            'evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul)'
+            'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
+            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr,ecR,ecP,ecr,efR,efP,efr))
+>>>>>>> 1d943370f57f69f5c4f1ea50dfa067d5c755af80
         conn.commit()
-        return redirect(url_for('candidato'))
+        return redirect(url_for('candidatos'))
     
 @app.route('/candidatos_fedita/<string:id>')
 def candidato_editar(id):
@@ -1221,7 +1230,7 @@ def candidato_editar(id):
                             epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
-@app.route('/candidatos_fedita2/<string:idP>', methods=['POST'])
+@app.route('/candidatos_fedita2/<string:id>', methods=['POST'])
 def candidato_fedita():
     if request.method == 'POST':
         idC = request.form['idCandidato']
@@ -1277,7 +1286,7 @@ def candidato_fedita():
         conn.commit()
         return redirect(url_for('candidato'))
 
-@app.route('/candidato_borrar/<string:can>')
+@app.route('/candidatos_borrar/<string:can>')
 def candidato_borrar(can):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
