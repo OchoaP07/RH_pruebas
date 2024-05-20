@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-   <form class="row g-3"  action="/vacantes_fedita2/" method="post">
+   <form class="row g-3"  action="/vacantes_fedita2/{{vac.0}}" method="post">
       <h3>
          <b class="mintit">Editar Vacante </b>
      </h3>
@@ -26,8 +26,8 @@
       <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{Obs.0}}"></input>
    </div>
    <div class="col-md-12">
-      <label for="candidactoSelecc" class="minap">Seleccion de Candidacto</label>
-      <input type="text" class="form-control" name="candidactoSelecc" id="candidactoSelecc" value="{{SeleC.0}}"></input>
+      <label  class="minap">Seleccion de Candidacto</label>
+      <input type="text" class="form-control" name="candidatoSelecc" id="candidatoSelecc" value="{{SeleC.0}}"></input>
    </div>
    <div class="col-md-12">
       <label for="fechaContratacion" class="minap">Fecha de Contratación</label>
@@ -37,6 +37,10 @@
        <label for="idr4v  " class="minap">Id Requisición</label>
        <input type="text" class="form-control" name="idRequisicion" id="idRequisicion" value="{{idRe.0}}"></input>
    </div>
+   <div class="col-md-12">
+      <label  class="minap">Id Puesto</label>
+      <input type="text" class="form-control" name="idPuesto" id="idPuesto" value="{{idRe.0}}"></input>
+  </div>
 
    <div class="col-12">
           <button type="submit" class="btn btn-outline-light">Actualizar</button>

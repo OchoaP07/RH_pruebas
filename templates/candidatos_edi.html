@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<form class="row g-3"  action="/candidatos_fedita2/" method="post">
+<form class="row g-3"  action="/candidatos_fedita2" method="post">
         <h3>
             <b class="mintit">Candidatos </b> 
         </h3>
@@ -76,12 +76,7 @@
  </div>
  <div class="col-md-12">
      <label for="idGradoAvance" class="minap">Grado Avance</label>
-<<<<<<< HEAD
-     <input type="text" class="form-control" name="idGradoAvance" id="idGradoAvance" value="{{GAva.0}}" readonly="readonly"></input>
-=======
      <input type="text" class="form-control" name="idGradoAvance" id="idGradoAvance" value="{{GAva.0}}"></input>
-
->>>>>>> 1d943370f57f69f5c4f1ea50dfa067d5c755af80
   </div>
   <div class="col-md-12">
       <label for="idCarrera" class="minap">Carrera</label>
@@ -116,12 +111,12 @@
       <input type="text" class="form-control" name="evalPsicolgReq" id="evalPsicolgReq" value="{{epR.0}}"></input>
   </div>
   <div class="col-md-12">
-      <label for="evalPsicolgPresen" class="minap">Evaluacion Psicolg Presente</label>
-      <input type="text" class="form-control" name="evalPsicologPresen" id="evalPsicologPresen" value="{{epP.0}}"></input>
+      <label class="minap">Evaluacion Psicolg Presente</label>
+      <input type="text" class="form-control" name="evalPsicolgPresen" id="evalPsicolgPresen" value="{{epP.0}}"></input>
   </div>
   <div class="col-md-12">
-      <label for="evalPsicolgResult" class="minap">Evaluacion Psicolg Resultado</label>
-      <input type="text" class="form-control" name="evalPsicologResult" id="evalPsicologResult" value="{{epr.0}}"></input>
+      <label  class="minap">Evaluacion Psicolg Resultado</label>
+      <input type="text" class="form-control" name="evalPsicolgResult" id="evalPsicolgResult" value="{{epr.0}}"></input>
   </div>
   <div class="col-md-12">
       <label for="evalPsicometReq" class="minap">Evaluacion Psicomet Requerida</label>
@@ -160,16 +155,16 @@
       <input type="text" class="form-control" name="evalConocResult" id="evalConocResult" value="{{ecr.0}}"></input>
   </div>
   <div class="col-md-12">
-      <label for="evalFinalReq" class="minap">Evaluacion Final Requerida</label>
-      <input type="text" class="form-control" name="entrevlFinalReq" id="entrevlFinalReq" value="{{efR.0}}"></input>
+      <label class="minap">Evaluacion Final Requerida</label>
+      <input type="text" class="form-control" name="entrevFinalReq" id="entrevFinalReq" value="{{efR.0}}"></input>
   </div>
   <div class="col-md-12">
       <label for="evalFinalPresen" class="minap">Evaluacion Final Presente</label>
       <input type="text" class="form-control" name="entrevFinalPresen" id="entrevFinalPresen" value="{{efP.0}}"></input>
   </div>
   <div class="col-md-12">
-      <label for="evalFinalResult" class="minap">Evaluacion Final Resultado</label>
-      <input type="text" class="form-control" name="entrevFinalResult" id="entrevFinalResult" value="{{efr.0}}"></input>
+      <label  class="minap">Evaluacion Final Resultado</label>
+      <input type="text" class="form-control" name="entrevFinalResul" id="entrevFinalResul" value="{{efr.0}}"></input>
   </div>
 
 

@@ -633,7 +633,6 @@ def puesto_fedita(idP):
                    'condicionesTrabajo = %s where idPuesto = %s', (codP, idAr, nomP, pueJ, jorn, remu, pres, desc, func, eda,
                    sex, idEC, idEs, idGA, idCa, expe, cono, manE, reqF, reqP, resp, conT, idP))
     conn.commit()
-
     cursor.execute('delete from puesto_has_habilidad where idPuesto =%s ', (idP))
     conn.commit()
     cursor.execute('delete from puesto_has_idioma where idPuesto =%s ', (idP))
@@ -935,8 +934,8 @@ def vacante_editar(id):
                            Pub=dato4, Obs=dato5, SeleC=dato6, FechaC=dato7, idRe=dato8, idPu=dato9)
 
 @app.route('/vacantes_fedita2/<string:id>', methods=['POST'])
-def vacante_fedita():
-     if request.method == 'POST':
+def vacante_fedita(id):
+    if request.method == 'POST':
         FuenteC = request.form['fuenteCandidato']
         FechaP = request.form['inicioFechaPublic']
         FechaE = request.form['finFechaPublic']
@@ -949,11 +948,11 @@ def vacante_fedita():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-            'UPDATE vacante SET (fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s,'
-            'publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s)',
-            (FuenteC, FechaP, FechaE, Pub, Obs, SeleC, FechaC, idR, idPu))
+            'UPDATE vacante SET fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s,'
+            'publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s where idVacante=%s',
+            (FuenteC, FechaP, FechaE, Pub, Obs, SeleC, FechaC, idR, idPu, id))
         conn.commit()
-        return redirect(url_for('vacantes'))
+    return redirect(url_for('vacantes'))
           
 @app.route('/vacantes_borrar/<string:vac>')
 def vacante_borrar(vac):
@@ -1215,8 +1214,8 @@ def candidato_editar(id):
                             epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
-@app.route('/candidatos_fedita2/<string:id>', methods=['POST'])
-def candidato_fedita():
+@app.route('/candidatos_fedita2', methods=['POST'])
+def candidatos_fedita2():
     if request.method == 'POST':
         idC = request.form['idCandidato']
         idV = request.form['idVacante']
@@ -1260,16 +1259,14 @@ def candidato_fedita():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-            'UPDATE candidato SET  (idCandidato=%s, idVacante=%s, idRequisicion=%s, idPuesto=%s, CURP=%s,'
-            'RFC=%s, nombre=%s, domCalle=%s, domNumExtInt=%s, domColonia=%s, tel1=%s, tel2=%s, correoE=%s, edad=%s,'
-            'sexo=%s, idEstadoCivil=%s, idGradoAvance=%s, idCarrera=%s, entrevSelecReq=%s, entrevSelecPresen=%s,'
-            'entrevSelecResult=%s,evalMedicaReq=%s,evalMedicaPresen=%s, evalMedicaResult=%s,evalPsicolgReq=%s,'
-            'evalPsicolgPresen=%s, evalPsicometResult=%s, evalTecnicaReq=%s, evalTecnicaPresen=%s,evalTecnicaResult=%s,'
-            'evalConocReq=%s, evalConocPresen=%s, evalConocResult=%s,entrevFinalReq=%s,entrevFinalPresen=%s,entrevFinalResul=%s)',
-            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
-            esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
+    'UPDATE candidato SET idVacante=%s, idRequisicion=%s, idPuesto=%s, CURP=%s, RFC=%s, nombre=%s, domCalle=%s, domNumExtInt=%s, domColonia=%s, tel1=%s, tel2=%s, correoE=%s, edad=%s, sexo=%s, idEstadoCivil=%s, idGradoAvance=%s, idCarrera=%s, entrevSelecReq=%s, entrevSelecPresen=%s, entrevSelecResult=%s, evalMedicaReq=%s, evalMedicaPresen=%s, evalMedicaResult=%s, evalPsicolgReq=%s, evalPsicolgPresen=%s, evalPsicolgResult=%s, evalPsicometReq=%s, evalPsicometPresene=%s, evalPsicometResult=%s, evalTecnicaReq=%s, evalTecnicaPresen=%s, evalTecnicaResult=%s, evalConocReq=%s, evalConocPresen=%s, evalConocResult=%s, entrevFinalReq=%s, entrevFinalPresen=%s, entrevFinalResul=%s WHERE idCandidato=%s',
+    (idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC, tel, tel2, correoE, edad, sexo, Ecivil, GAva, carrera,
+     esr, esP, esR, emR, emP, emr, epR, epP, epr, epRe, epPr, epre, etR, etP, etr, ecR, ecP, ecr, efR, efP, efr, idC)
+)
+
+
         conn.commit()
-        return redirect(url_for('candidato'))
+    return redirect(url_for('candidatos'))
 
 @app.route('/candidatos_borrar/<string:can>')
 def candidato_borrar(can):
