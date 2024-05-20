@@ -764,7 +764,7 @@ def requisicion_editar(id):
 
 
 @app.route('/requisicion_fedita2/<string:id>', methods=['POST'])
-def requisicion_fedita():
+def requisicion_fedita(id):
     if request.method == 'POST':
         folio = request.form['folio']
         elab = request.form['fechaElab']
@@ -776,16 +776,15 @@ def requisicion_fedita():
         nomsoli = request.form['nomSolicita']
         nomauto = request.form['nomAutoriza']
         nomrevi = request.form['nomRevisa']
-
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
             'UPDATE requisicion SET folio = %s, fechaElab = %s, fechaRecluta = %s, fechaInicVac=%s,'
-            'motivoRequisicion=%s, motivoEspesifique=%s, tipoVacante=%s, nomSolicita=%s,'
+            'motivoRequisicion=%s, motivoEspecifique=%s, tipoVacante=%s, nomSolicita=%s,'
             'nomAutoriza=%s, nomRevisa=%s WHERE idRequisicion=%s',(folio, elab, recluta, inicvac,
-            motivo, motes, tipo, nomsoli, nomauto, nomrevi))
+            motivo, motes, tipo, nomsoli, nomauto, nomrevi, id))
         conn.commit()
-        return redirect(url_for('requisicion'))
+    return redirect(url_for('requisicion'))
 
 @app.route('/requisicion_agrega2')
 def requisicion_agrOp2():
@@ -1161,6 +1160,8 @@ def candidato_editar(id):
     dato15 = cursor.fetchone()
     cursor.execute('select idEstadoCivil from candidato where idCandidato = %s', (id))
     dato16 = cursor.fetchone()
+    cursor.execute('select idEscolaridad from candidato where idCandidato = %s', (id))
+    da=cursor.fetchone()
     cursor.execute('select idGradoAvance from candidato where idCandidato = %s', (id))
     dato17 = cursor.fetchone()
     cursor.execute('select idCarrera from candidato where idCandidato = %s', (id))
@@ -1207,15 +1208,15 @@ def candidato_editar(id):
     dato38 = cursor.fetchone()
     cursor.execute('select entrevFinalResul from candidato where idCandidato = %s', (id))
     dato39 = cursor.fetchone()
-    return render_template("candidatos_edi.html", can=dato, idC=dato1, idV=dato2, idR=dato3, Pjf=dato4, curp=dato5,
+    return render_template("candidatos_edi.html", can=dato, ides=da,idC=dato1, idV=dato2, idR=dato3, Pjf=dato4, curp=dato5,
                             rfc=dato6, nom=dato7, calle=dato8, numEI=dato9, domC=dato10, tel=dato11, tel2=dato12, 
                             correoE=dato13, edad=dato14, sexo=dato15, Ecivil=dato16, GAva=dato17, carrera=dato18,
                             esr=dato19, esP=dato20, esR=dato21, emR=dato22, emP=dato23, emr=dato24, epR=dato25,
                             epP=dato26,epr=dato27, epRe=dato28, epPr=dato29, epre=dato30, etR=dato31, etP=dato32,
                             etr=dato33,ecR=dato34, ecP=dato35, ecr=dato36, efR=dato37, efP=dato38, efr=dato39)
 
-@app.route('/candidatos_fedita2', methods=['POST'])
-def candidatos_fedita2():
+@app.route('/candidatos_fedita2/<string:id>', methods=['POST'])
+def candidatos_fedita2(id):
     if request.method == 'POST':
         idC = request.form['idCandidato']
         idV = request.form['idVacante']
@@ -1232,6 +1233,7 @@ def candidatos_fedita2():
         correoE = request.form['correoE']
         edad = request.form['edad']
         sexo= request.form['sexo']
+        esc= request.form['esco']
         Ecivil = request.form['idEstadoCivil']
         GAva = request.form['idGradoAvance']
         carrera = request.form['idCarrera']
@@ -1259,12 +1261,10 @@ def candidatos_fedita2():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-    'UPDATE candidato SET idVacante=%s, idRequisicion=%s, idPuesto=%s, CURP=%s, RFC=%s, nombre=%s, domCalle=%s, domNumExtInt=%s, domColonia=%s, tel1=%s, tel2=%s, correoE=%s, edad=%s, sexo=%s, idEstadoCivil=%s, idGradoAvance=%s, idCarrera=%s, entrevSelecReq=%s, entrevSelecPresen=%s, entrevSelecResult=%s, evalMedicaReq=%s, evalMedicaPresen=%s, evalMedicaResult=%s, evalPsicolgReq=%s, evalPsicolgPresen=%s, evalPsicolgResult=%s, evalPsicometReq=%s, evalPsicometPresene=%s, evalPsicometResult=%s, evalTecnicaReq=%s, evalTecnicaPresen=%s, evalTecnicaResult=%s, evalConocReq=%s, evalConocPresen=%s, evalConocResult=%s, entrevFinalReq=%s, entrevFinalPresen=%s, entrevFinalResul=%s WHERE idCandidato=%s',
-    (idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC, tel, tel2, correoE, edad, sexo, Ecivil, GAva, carrera,
-     esr, esP, esR, emR, emP, emr, epR, epP, epr, epRe, epPr, epre, etR, etP, etr, ecR, ecP, ecr, efR, efP, efr, idC)
-)
-
-
+            'UPDATE candidato SET idVacante=%s, idRequisicion=%s, idPuesto=%s, CURP=%s, RFC=%s, nombre=%s, domCalle=%s, domNumExtInt=%s, domColonia=%s, tel1=%s, tel2=%s, correoE=%s, edad=%s, sexo=%s, idEstadoCivil=%s, idEscolaridad=%s, idGradoAvance=%s, idCarrera=%s, entrevSelecReq=%s, entrevSelecPresen=%s, entrevSelecResult=%s, evalMedicaReq=%s, evalMedicaPresen=%s, evalMedicaResult=%s, evalPsicolgReq=%s, evalPsicologPresen=%s, evalPsicologResult=%s, evalPsicometReq=%s, evalPsicometPresene=%s, evalPsicometResult=%s, evalTecnicaReq=%s, evalTecnicaPresen=%s, evalTecnicaResult=%s, evalConocReq=%s, evalConocPresen=%s, evalConocResult=%s, entrevFinalReq=%s, entrevFinalPresen=%s, entrevFinalResul=%s WHERE idCandidato=%s',
+            (idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC, tel, tel2, correoE, edad, sexo, Ecivil, esc, GAva, carrera,
+             esr, esP, esR, emR, emP, emr, epR, epP, epr, epRe, epPr, epre, etR, etP, etr, ecR, ecP, ecr, efR, efP, efr,id)
+            )
         conn.commit()
     return redirect(url_for('candidatos'))
 
