@@ -1075,7 +1075,6 @@ def candidato_agrOp2():
 @app.route('/candidato_fagrega2', methods=['POST'])
 def candidato_fagrega():
     if request.method == 'POST':
-        idC = request.form['idCandidato']
         idV = request.form['idVacante']
         idR = request.form['idRequisicion']
         Pjf = request.form['idPuesto']
@@ -1093,6 +1092,7 @@ def candidato_fagrega():
         Ecivil = request.form['idEstadoCivil']
         GAva = request.form['idGradoAvance']
         carrera = request.form['idCarrera']
+        es= request.form['esco']
         esr = request.form['entrevSelecReq']
         esP = request.form['entrevSelecPresen']
         esR = request.form['entrevSelecResult']
@@ -1117,15 +1117,15 @@ def candidato_fagrega():
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
         cursor.execute(
-            'INSERT INTO candidato (idCandidato, idVacante, idRequisicion, idPuesto, CURP,'
+            'INSERT INTO candidato (idVacante, idRequisicion, idPuesto, CURP,'
             'RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad,'
-            'sexo, idEstadoCivil, idGradoAvance, idCarrera, entrevSelecReq, entrevSelecPresen,'
+            'sexo, idEstadoCivil, idGradoAvance, idEscolaridad, idCarrera, entrevSelecReq, entrevSelecPresen,'
             'entrevSelecResult,evalMedicaReq,evalMedicaPresen, evalMedicaResult,evalPsicolgReq,'
             'evalPsicolgPresen, evalPsicometResult, evalTecnicaReq evalTecnicaPresen,evalTecnicaResult,'
             'evalConocReq, evalConocPresen, evalConocResult,entrevFinalReq,entrevFinalPresen,entrevFinalResul) '
             'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'
                     '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)',
-            (idC, idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,carrera,
+            (idV, idR, Pjf, curp, rfc, nom, calle, numEI, domC,tel,tel2,correoE,edad,sexo,Ecivil,GAva,es,carrera,
             esr,esP,esR,emR,emP,emr,epR,epP,epr,epRe,epPr,epre,etR,etP,etr, ecR,ecP,ecr,efR,efP,efr))
         conn.commit()
         return redirect(url_for('candidato'))
